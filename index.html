@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#fbeedb">
+<meta name="format-detection" content="telephone=no">
+<title>忍者ゲート突破｜数字ゲートで仲間をふやして全国68国の妖怪を退散させる無料ゲーム</title>
+<meta name="description" content="指で左右に動かすだけの手裏剣シューティング。＋×−÷のゲートで忍者の仲間をふやし、各地の名物が化けた妖怪を「ぽんっ」と退散。壱岐から陸奥まで、昔の国68国のお城を取りもどそう。無料・登録なし。">
+<link rel="canonical" href="https://ninja-gate.kkpwebninja.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="忍者ゲート突破">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="忍者ゲート突破｜全国68国の妖怪を手裏剣で退散">
+<meta property="og:description" content="＋×−÷のゲートで忍者の仲間をふやして、名物の妖怪を「ぽんっ」と退散。壱岐から陸奥まで68国のお城を取りもどす無料ゲーム。">
+<meta property="og:url" content="https://ninja-gate.kkpwebninja.com/">
+<meta property="og:image" content="https://ninja-gate.kkpwebninja.com/ogp.png?v=20260930">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="忍者の子どもたちと名物の妖怪たち、お城と数字ゲートのイラスト">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kkp_webninja">
+<meta name="twitter:title" content="忍者ゲート突破｜全国68国の妖怪を手裏剣で退散">
+<meta name="twitter:description" content="＋×−÷のゲートで仲間をふやして、名物の妖怪を退散。68国のお城を取りもどす無料ゲーム。">
+<meta name="twitter:image" content="https://ninja-gate.kkpwebninja.com/ogp.png?v=20260930">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "忍者ゲート突破",
+  "url": "https://ninja-gate.kkpwebninja.com/",
+  "description": "指で左右に動かすだけの手裏剣シューティング。数字ゲートで忍者の仲間をふやし、昔の国68国のお城に居座る名物の妖怪を退散させる。",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ja",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "author": { "@type": "Organization", "name": "web忍者の砦", "url": "https://kkpwebninja.com/" },
+  "publisher": { "@type": "Organization", "name": "web忍者の砦", "url": "https://kkpwebninja.com/" }
+}
+</script>
+<script>
+  // GA4：本番（kkpwebninja.com）だけで計測。LANでの実機確認や ?preview=1 のときは読み込まない
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  if (/\.kkpwebninja\.com$/.test(location.hostname) && !/[?&]preview=1/.test(location.search)) {
+    var ga = document.createElement('script'); ga.async = true; ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L';
+    document.head.appendChild(ga);
+    gtag('js', new Date());
+    gtag('config', 'G-2LM85GJN0L');
+  }
+</script>
+<style>
+:root{
+  --bg:#fbeedb;
+  --cream:#fff7ea;
+  --line:#ead6b6;
+  --ink:#4a3526;
+  --sub:#8a6f58;
+  --orange:#f08a24;
+  --orange-d:#c9661a;
+  --good:#2a9d8f;
+  --bad:#e0563f;
+  --font:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","M PLUS Rounded 1c","Rounded Mplus 1c","BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;height:100%;background:var(--bg);color:var(--ink);
+  overflow:hidden;overscroll-behavior:none;touch-action:none;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  -webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;
+}
+body{position:fixed;inset:0;display:flex;justify-content:center;align-items:stretch;font-family:var(--font)}
+#wrap{
+  position:relative;
+  /* 古いSafariは100dvh非対応で100vh（ツールバー裏まで）になるため、JSで実測した高さ --app-h を優先 */
+  width:min(100vw,480px,calc(100vh * .62));
+  width:min(100vw,480px,calc(var(--app-h,100dvh) * .62));
+  height:100vh;height:var(--app-h,100dvh);
+  overflow:hidden;background:var(--cream);
+}
+@media (min-width:500px){#wrap{border-left:1px solid var(--line);border-right:1px solid var(--line)}}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+
+#pauseBtn{
+  position:absolute;top:8px;right:8px;width:44px;height:44px;
+  border:0;border-radius:10px;background:rgba(255,247,234,.85);
+  display:none;align-items:center;justify-content:center;gap:5px;cursor:pointer;
+  touch-action:manipulation;
+}
+#pauseBtn span{display:block;width:5px;height:16px;border-radius:2px;background:var(--ink)}
+#pauseBtn.on{display:flex}
+
+#ov{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(to bottom,rgba(255,247,234,0) 0%,rgba(255,247,234,.55) 35%,rgba(255,247,234,.8) 100%);
+  touch-action:manipulation;
+}
+#ov[hidden]{display:none}
+.sheet{
+  display:flex;flex-direction:column;max-height:100%;
+  background:var(--cream);border-top:3px solid var(--orange);
+  padding:18px 20px calc(18px + env(safe-area-inset-bottom));
+}
+.sheet-body{min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+.sheet-body > :last-child{margin-bottom:14px}
+.kicker{margin:0 0 4px;font-size:13px;color:var(--orange-d);font-weight:700;letter-spacing:.04em}
+.sheet h1{margin:0 0 6px;font-size:32px;line-height:1.2;font-weight:800;letter-spacing:.02em}
+.lead{margin:0 0 12px;font-size:14px;color:var(--sub);line-height:1.6}
+.rows{margin:0 0 16px;padding:0;border-top:1px solid var(--line)}
+.rows div{display:grid;grid-template-columns:5.2em 1fr;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.55}
+.rows dt{color:var(--sub);font-weight:700}
+.rows dd{margin:0}
+.rows dd b{font-size:18px}
+.rows .new{color:var(--bad);font-weight:800;margin-left:6px;font-size:13px}
+.g{color:#3b82c4;font-weight:800}
+.r{color:var(--bad);font-weight:800}
+.btns{flex:none;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.btn{
+  font-family:inherit;font-size:18px;font-weight:800;border:0;border-radius:12px;
+  min-height:48px;padding:12px 26px;cursor:pointer;touch-action:manipulation;
+}
+.btn.primary{background:var(--orange);color:#fff;box-shadow:0 3px 0 var(--orange-d)}
+.btn.primary:active{transform:translateY(2px);box-shadow:0 1px 0 var(--orange-d)}
+.btn.link{background:none;color:var(--ink);font-size:15px;min-height:44px;padding:10px 6px;text-decoration:underline;text-underline-offset:4px}
+.note{margin:12px 0 0;font-size:12px;color:var(--sub)}
+.note a{color:var(--sub);text-underline-offset:3px}
+.btn.ghost{background:none;border:1.5px solid var(--line);color:var(--sub);font-size:14px;min-height:44px;padding:8px 16px}
+.btns.sub{margin-top:24px}
+#omiyage{margin-top:24px}
+.frag{margin:4px 0 14px;padding:10px 14px;border-left:4px solid var(--orange);background:#fbeedb}
+.frag small{display:block;font-size:12px;color:var(--sub);margin-bottom:2px}
+.frag p{margin:0;font-size:16px;line-height:1.7;font-weight:700}
+.route{display:flex;align-items:flex-start;margin:6px 0 14px;padding:0;list-style:none}
+.route li{flex:1;text-align:center;font-size:11px;color:var(--sub);position:relative;padding-top:18px;line-height:1.3}
+.route li::before{content:"";position:absolute;top:4px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--line)}
+.route li::after{content:"";position:absolute;top:8px;left:calc(50% + 7px);right:calc(-50% + 7px);height:2px;background:var(--line)}
+.route li:last-child::after{display:none}
+.route li.done::before{background:var(--orange)}
+.route li.now{color:var(--ink);font-weight:800}
+.route li.now::before{background:var(--orange);box-shadow:0 0 0 4px rgba(240,138,36,.25)}
+.story p{margin:0 0 8px;font-size:15px;line-height:1.8}
+.jmap{margin:6px 0 10px}
+.unified-footer{text-align:center;padding:1.2rem 0 .4rem;margin-top:1rem;font-size:.75rem;color:#94a3b8;line-height:2;border-top:1px solid #f0e6d2}
+.unified-footer .uf-name{font-weight:800;color:#8b6b3d;font-size:.82rem}
+.unified-footer a{color:#8b6b3d;text-decoration:none;margin:0 .4rem}
+.unified-footer .uf-copy{color:#bfa97a}
+.jmap svg{display:block;width:100%;max-width:300px;max-height:34vh;margin:0 auto}
+.jmap figcaption{font-size:12px;color:var(--sub);text-align:center}
+.btn.link.sm{font-size:13px;min-height:36px;padding:4px 2px}
+.route li{font-size:10px}
+@media (hover:none){.pc-only{display:none}}
+/* 背の低い画面（iPhone SE 初代など）は説明を詰めてボタンを優先 */
+@media (max-height:700px){
+  .sheet{padding-top:14px}
+  .sheet h1{font-size:26px;margin-bottom:4px}
+  .kicker{font-size:12px;margin-bottom:2px}
+  .lead{font-size:13px;margin-bottom:8px}
+  .rows div{padding:6px 0;font-size:13px;line-height:1.5}
+  .rows dd b{font-size:16px}
+}
+@media (max-height:600px){
+  .sheet .intro{display:none}
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="cv"></canvas>
+  <button id="pauseBtn" type="button" aria-label="一時停止"><span></span><span></span></button>
+  <div id="ov"><div class="sheet" id="sheet"></div></div>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+// ===== 画面 =====
+const LW = 360;                     // 論理幅（高さは端末に合わせて可変）
+const wrap = document.getElementById('wrap');
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const ov = document.getElementById('ov');
+const sheet = document.getElementById('sheet');
+const pauseBtn = document.getElementById('pauseBtn');
+const FONT = getComputedStyle(document.documentElement).getPropertyValue('--font').trim() || 'sans-serif';
+
+let LH = 640, scale = 1, dpr = 1;
+function resize() {
+  document.documentElement.style.setProperty('--app-h', window.innerHeight + 'px');
+  const r = wrap.getBoundingClientRect();
+  dpr = Math.min(window.devicePixelRatio || 1, 3);
+  cv.width = Math.round(r.width * dpr);
+  cv.height = Math.round(r.height * dpr);
+  scale = r.width / LW;
+  LH = r.height / scale;
+  G.squadY = LH - 118;
+}
+
+// ===== 色 =====
+const C = {
+  bg: '#fbeedb', road: '#fff7ea', edge: '#efdcbc', dash: '#f4e3c6', stone: '#e6cfa8',
+  ink: '#4a3526', sub: '#8a6f58',
+  orange: '#f08a24', orangeD: '#b85f12',
+  ninja: '#3d3547', ninjaD: '#2a2432', skin: '#f6dcc0',
+  boyHair: '#6b4226', girl: '#f4e6c8', girlD: '#d6bf95', girlHair: '#4a3024', wolf: '#a3a7ae', wolfD: '#7d828b',
+  good: '#3b82c4', goodD: '#28609a', bad: '#e0563f', badD: '#b8402c', dud: '#a0978d', dudD: '#7a7169',
+  hito: '#a9d6e5', hitoD: '#5d8fa3', kasa: '#f4a340', kasaD: '#c9761f', kasaY: '#ffd66b',
+  chochin: '#fbe7b0', chochinD: '#d9a94c', koni: '#f08c6c', koniD: '#b85a3e', horn: '#fff1d6', tora: '#f6c945',
+  tanuki: '#a8744a', tanukiD: '#6e4a2c', tanukiL: '#f3dfbd', leaf: '#8cc36b', leafD: '#5f9a45', smoke: '#fffaf2',
+  kara: '#b9824c', karaD: '#7f5530',
+  boss: '#3e4f7a', bossD: '#27334f', gold: '#f2c14e', goldD: '#c7962a',
+  wall: '#fffaf0', roof: '#6d5f5a', roofD: '#4f4440',
+  crate: '#dba468', crateD: '#a8703a',
+  shuri: '#5f6470', shuriL: '#9aa0ab',
+};
+
+// ===== 画像素材 =====
+// 生成した画像ができたら、ここにパスを入れるだけで図形から差し替わる（null の間は図形で描く）。
+// 文字は画像に入れない（ゲートの数字・箱の名前は Canvas で後から描く）。
+const ART = {
+  ground: 'img/ground.webp',        // 地面（縦につながるタイル。幅360基準）
+  ninja: 'img/ninja.webp',          // 仲間の忍者（1体）
+  boy: 'img/boy.webp',              // シリーズの男の子（忍者姿）
+  girl: 'img/girl.webp',            // シリーズの女の子（忍者姿）
+  wolf: 'img/wolf.webp',            // シリーズのウルフ（忍者姿）
+  hitotsume: 'img/hitotsume.webp',  // 敵：一つ目小僧
+  karakasa: 'img/karakasa.webp',    // 敵：からかさおばけ
+  chochin: 'img/chochin.webp',      // 敵：ちょうちんおばけ
+  koni: 'img/koni.webp',            // 敵：子鬼（大きい敵）
+  daiyokai: 'img/daiyokai.webp',    // ボス：城に居座る大だぬき
+  castle: 'img/castle.webp',        // ゴールの城
+  crate: 'img/crate.webp',          // アイテム箱
+  shuriken: 'img/shuriken.webp',    // 手裏剣（弾）
+};
+const IMG = {};
+for (const k in ART) {
+  if (!ART[k]) continue;
+  const im = new Image();
+  im.onload = () => { IMG[k] = im; };
+  im.src = ART[k];
+}
+// 名物ボスの絵（承認されたものからここに足す）。{ 国名: 'img/boss/xxx.webp' }
+const BOSS_ART = {
+  '壱岐': 'img/boss/uni.webp', '対馬': 'img/boss/hachimitsu.webp', '隠岐': 'img/boss/ika.webp', '佐渡': 'img/boss/kaki.webp',
+  '志摩': 'img/boss/iseebi.webp', '飛騨': 'img/boss/sarubobo.webp', '安房': 'img/boss/biwa.webp', '淡路': 'img/boss/tamanegi.webp',
+  '伊豆': 'img/boss/wasabi.webp', '若狭': 'img/boss/nuribashi.webp', '因幡': 'img/boss/chikuwa.webp', '土佐': 'img/boss/katsuobushi.webp',
+  '伊賀': 'img/boss/katayaki.webp', '伯耆': 'img/boss/benizuwai.webp', '丹後': 'img/boss/chirimen.webp', '石見': 'img/boss/kawara.webp',
+  '但馬': 'img/boss/ushi.webp', '日向': 'img/boss/hyuganatsu.webp', '讃岐': 'img/boss/udon.webp', '長門': 'img/boss/hagiyaki.webp',
+  '豊前': 'img/boss/karaage.webp', '和泉': 'img/boss/mizunasu.webp', '駿河': 'img/boss/abekawamochi.webp', '周防': 'img/boss/kingyochochin.webp',
+  '大隅': 'img/boss/satsumaimo.webp', '備中': 'img/boss/denim.webp', '阿波': 'img/boss/sudachi.webp', '美作': 'img/boss/bancha.webp',
+  '備後': 'img/boss/tatami.webp', '出雲': 'img/boss/soroban.webp', '安芸': 'img/boss/kaki_oyster.webp', '相模': 'img/boss/kamaboko.webp',
+  '能登': 'img/boss/owan.webp', '備前': 'img/boss/bizenyaki.webp', '山城': 'img/boss/ujicha.webp', '甲斐': 'img/boss/budou.webp',
+  '河内': 'img/boss/wakagobou.webp', '紀伊': 'img/boss/mikan.webp', '遠江': 'img/boss/tako_kite.webp', '丹波': 'img/boss/kuromame.webp',
+  '筑後': 'img/boss/unagi_seiro.webp',
+  '薩摩': 'img/boss/satsumaage.webp', '三河': 'img/boss/mamemiso.webp', '肥前': 'img/boss/castella.webp', '出羽': 'img/boss/shogikoma.webp',
+  '筑前': 'img/boss/hakataningyo.webp', '肥後': 'img/boss/karashirenkon.webp', '加賀': 'img/boss/kinpaku.webp', '摂津': 'img/boss/konbu.webp',
+  '播磨': 'img/boss/soumen.webp',
+  '伊予': 'img/boss/taimeshi.webp', '下野': 'img/boss/ichigo.webp', '上総': 'img/boss/nori.webp', '越中': 'img/boss/masuzushi.webp',
+  '越後': 'img/boss/sasadango.webp', '下総': 'img/boss/shoyu.webp', '信濃': 'img/boss/soba.webp', '豊後': 'img/boss/shiitake.webp',
+  '大和': 'img/boss/kakinohazushi.webp',
+  '上野': 'img/boss/daruma.webp', '越前': 'img/boss/washi.webp', '常陸': 'img/boss/konnyaku.webp', '伊勢': 'img/boss/hamaguri.webp',
+  '尾張': 'img/boss/shibori.webp', '武蔵': 'img/boss/senbei.webp', '陸奥': 'img/boss/kokeshi.webp',
+};
+function bossArt(id) {
+  const k = 'boss:' + id;
+  if (IMG[k]) return k;
+  if (BOSS_ART[id] && !IMG['_' + k]) { IMG['_' + k] = 1; const im = new Image(); im.onload = () => { IMG[k] = im; }; im.src = BOSS_ART[id]; }
+  return null;
+}
+const WHITE = {};
+function whiteOf(k) {
+  if (WHITE[k] !== undefined) return WHITE[k];
+  const im = IMG[k];
+  if (!im) return null;
+  const c = document.createElement('canvas'); c.width = im.width; c.height = im.height;
+  const x = c.getContext('2d'); x.drawImage(im, 0, 0);
+  x.globalCompositeOperation = 'source-in'; x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+  return (WHITE[k] = c);
+}
+function spriteFlash(k, x, y, w, h, a) {
+  const im = IMG[k], wh = whiteOf(k);
+  if (!im || !wh) return;
+  const f = Math.min(w / im.width, h / im.height);
+  ctx.globalAlpha = a; ctx.drawImage(wh, x - im.width * f / 2, y - im.height * f / 2, im.width * f, im.height * f); ctx.globalAlpha = 1;
+}
+function sprite(k, x, y, w, h, rot) {
+  const im = IMG[k];
+  if (!im) return false;
+  // 縦横比を保って w×h の枠に収める
+  const f = Math.min(w / im.width, h / im.height);
+  w = im.width * f; h = im.height * f;
+  if (rot) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+    ctx.drawImage(im, -w / 2, -h / 2, w, h);
+    ctx.restore();
+  } else ctx.drawImage(im, x - w / 2, y - h / 2, w, h);
+  return true;
+}
+
+// ===== ユーティリティ =====
+const rand = (a, b) => a + Math.random() * (b - a);
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const pick = a => a[(Math.random() * a.length) | 0];
+function mulberry32(seed) {
+  return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+}
+let srng = Math.random;                        // 面ごとに startStage で種を入れ直す
+const srand = (a, b) => a + srng() * (b - a);
+const spick = a => a[(srng() * a.length) | 0];
+function loadBest() { try { return parseInt(localStorage.getItem('ninjaGate.best') || '0', 10) || 0; } catch (e) { return 0; } }
+function saveBest(v) { try { localStorage.setItem('ninjaGate.best', String(v)); } catch (e) {} }
+function loadJSON(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } }
+function saveJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+const SAVE = {
+  scrolls: loadJSON('ninjaGate.scrolls2', []),       // 手に入れた巻物の切れはし（章ごと ch1〜ch8）
+  stageBest: loadJSON('ninjaGate.stageBest', {}),    // 各面をクリアした時の最高人数
+  edoBest: loadJSON('ninjaGate.mutsuBest', 0),       // 陸奥（さいご）を何人でクリアしたか（最高）
+};
+
+// ===== 状態 =====
+const G = {
+  state: 'title', stage: 1, score: 0, stageScore0: 0, best: loadBest(),
+  t: 0, bgT: 0, s: 1, stageLen: 45,
+  N: 10, x: 180, tx: 180, squadY: 520, rate: 0.25, pierce: 0, dmgMul: 1, fireCd: 0, flash: 0, pulse: 0,
+  bullets: [], enemies: [], gates: [], boxes: [], parts: [], texts: [],
+  slashes: [], vx: 0, meleeCd: 0,
+  events: [], evi: 0, boss: null, castle: null, warn: 0, shake: 0, endT: 0, reason: '', bonus: 0, nextId: 1,
+};
+
+// 仲間の並び（ひまわり配置）。0〜2番はシリーズの3人
+const OFF = [];
+for (let i = 0; i < 90; i++) {
+  const a = i * 2.39996, r = Math.sqrt(i) * 6.4;
+  OFF.push([Math.cos(a) * r, Math.sin(a) * r * 0.6]);
+}
+const ORDER = OFF.map((o, i) => i).sort((a, b) => OFF[a][1] - OFF[b][1]);
+const LEADERS = [['boy', 0, -7], ['girl', -13, 1], ['wolf', 13, 1]];
+// 90人をこえても、隊は人数に応じてゆるやかに広がる（描く忍者は90人まで）
+const squadSpread = () => 1 + 0.4 * Math.log10(Math.max(1, G.N / 90));
+const squadHalf = () => (Math.sqrt(Math.min(G.N, 90)) * 6.4 + 8) * squadSpread();
+
+// ===== ステージ構成 =====
+// 全国68国（令制国66国＋壱岐・対馬）を、1598年（慶長3年）の国別石高の少ない順にめぐる。数字は画面に出さない。
+// 出典：野中準編「慶長三年地検目録」『大日本租税志 中巻』（1908年）。値はWikipedia「石高」の表から取った。
+// 慶長3年の目録とは未照合。同書の天文22年の国高一覧とは29国中22国が一致し、並び順は変わらない。
+// 実在の人物・戦・城の名前は出さない。
+const KUNI = [   // 慶長3年の石高の少ない順。[国名, 名物, 今の産地, 緯度, 経度]
+  ["壱岐", "ウニ", "長崎県壱岐市", 33.78, 129.72],
+  ["対馬", "はちみつ", "長崎県対馬市", 34.4, 129.33],
+  ["隠岐", "イカ", "島根県隠岐郡", 36.2, 133.3],
+  ["佐渡", "柿", "新潟県佐渡市", 38.05, 138.4],
+  ["志摩", "伊勢えび", "三重県志摩市", 34.33, 136.83],
+  ["飛騨", "さるぼぼ", "岐阜県高山市", 36.15, 137.25],
+  ["安房", "びわ", "千葉県南房総市", 35.0, 139.9],
+  ["淡路", "玉ねぎ", "兵庫県南あわじ市", 34.35, 134.85],
+  ["伊豆", "わさび", "静岡県伊豆市", 34.9, 138.95],
+  ["若狭", "塗り箸", "福井県小浜市", 35.5, 135.75],
+  ["因幡", "とうふちくわ", "鳥取県鳥取市", 35.45, 134.2],
+  ["土佐", "かつお節", "高知県", 33.55, 133.5],
+  ["伊賀", "かたやき", "三重県伊賀市", 34.75, 136.13],
+  ["伯耆", "ベニズワイガニ", "鳥取県境港市", 35.4, 133.5],
+  ["丹後", "ちりめん", "京都府京丹後市", 35.6, 135.1],
+  ["石見", "赤いかわら", "島根県江津市", 34.9, 132.1],
+  ["但馬", "黒毛の牛", "兵庫県美方郡香美町", 35.4, 134.75],
+  ["日向", "日向夏", "宮崎県", 32.1, 131.35],
+  ["讃岐", "うどん", "香川県全域", 34.25, 133.95],
+  ["長門", "萩焼", "山口県萩市", 34.2, 131.2],
+  ["豊前", "からあげ", "大分県中津市", 33.65, 131.0],
+  ["和泉", "水なす", "大阪府泉州地域", 34.45, 135.4],
+  ["駿河", "安倍川もち", "静岡県静岡市", 35.05, 138.4],
+  ["周防", "金魚ちょうちん", "山口県柳井市", 34.1, 131.8],
+  ["大隅", "さつまいも", "鹿児島県 種子島", 31.4, 130.85],
+  ["備中", "デニム", "岡山県井原市", 34.75, 133.65],
+  ["阿波", "すだち", "徳島県", 33.95, 134.35],
+  ["美作", "番茶", "岡山県美作市海田", 35.05, 134.0],
+  ["備後", "畳", "広島県福山市", 34.65, 133.15],
+  ["出雲", "そろばん", "島根県仁多郡奥出雲町", 35.35, 132.85],
+  ["安芸", "かき", "広島県広島市", 34.45, 132.55],
+  ["相模", "かまぼこ", "神奈川県小田原市", 35.4, 139.3],
+  ["能登", "うるし塗りのおわん", "石川県輪島市", 37.1, 136.9],
+  ["備前", "備前焼", "岡山県備前市", 34.75, 134.05],
+  ["山城", "宇治茶", "京都府宇治市", 34.95, 135.75],
+  ["甲斐", "ぶどう", "山梨県甲州市", 35.65, 138.6],
+  ["河内", "若ごぼう", "大阪府八尾市", 34.6, 135.62],
+  ["紀伊", "みかん", "和歌山県有田市", 33.95, 135.45],
+  ["遠江", "凧", "静岡県浜松市", 34.85, 137.85],
+  ["丹波", "黒豆", "兵庫県丹波篠山市", 35.15, 135.25],
+  ["筑後", "うなぎのせいろ蒸し", "福岡県柳川市", 33.25, 130.5],
+  ["薩摩", "さつま揚げ", "鹿児島県鹿児島市ほか県内全域", 31.65, 130.4],
+  ["三河", "豆みそ", "愛知県岡崎市八帖町", 34.85, 137.35],
+  ["肥前", "カステラ", "長崎県長崎市", 33.1, 129.9],
+  ["出羽", "将棋の駒", "山形県天童市", 39.2, 140.2],
+  ["筑前", "博多人形", "福岡県福岡市", 33.6, 130.45],
+  ["肥後", "からしれんこん", "熊本県", 32.75, 130.8],
+  ["加賀", "金箔", "石川県金沢市", 36.45, 136.6],
+  ["摂津", "昆布", "大阪府大阪市", 34.75, 135.35],
+  ["播磨", "手延べそうめん", "兵庫県たつの市", 34.9, 134.7],
+  ["伊予", "鯛めし", "愛媛県松山市北条地区", 33.75, 132.85],
+  ["下野", "いちご", "栃木県", 36.6, 139.85],
+  ["上総", "のり", "千葉県富津市", 35.35, 140.2],
+  ["越中", "ます寿し", "富山県", 36.65, 137.2],
+  ["越後", "笹だんご", "新潟県", 37.6, 139.0],
+  ["下総", "しょうゆ", "千葉県野田市", 35.85, 140.2],
+  ["信濃", "そば", "長野県", 36.2, 138.1],
+  ["豊後", "しいたけ", "大分県", 33.1, 131.5],
+  ["大和", "柿の葉寿司", "奈良県五條市", 34.45, 135.85],
+  ["上野", "だるま", "群馬県高崎市", 36.4, 139.0],
+  ["越前", "和紙", "福井県越前市", 35.95, 136.2],
+  ["常陸", "こんにゃく", "茨城県大子町", 36.4, 140.35],
+  ["美濃", "和傘", "岐阜県岐阜市", 35.45, 136.85],
+  ["伊勢", "焼きはまぐり", "三重県桑名市", 34.7, 136.45],
+  ["尾張", "しぼり染め", "愛知県名古屋市緑区", 35.2, 136.9],
+  ["武蔵", "せんべい", "埼玉県草加市", 35.9, 139.5],
+  ["近江", "たぬきの焼き物", "滋賀県甲賀市信楽町", 35.15, 136.1],
+  ["陸奥", "こけし", "宮城県", 39.5, 141.2],
+];
+
+// 章：8国×4章＋9国×4章。章の中はファミコン式（コンティニュー3回）
+const CH_SIZE = [8, 8, 8, 8, 9, 9, 9, 9];
+const CHAPTERS = [];
+{ let k = 1; CH_SIZE.forEach((n, i) => { CHAPTERS.push({ n: i + 1, first: k, len: n }); k += n; }); }
+const FRAGS = [
+  ['巻物の切れはし', '……まつりの日までに……'],
+  ['妖怪が落とした手紙', 'おやぶんが 北の大きなお城で まってる'],
+  ['巻物の切れはし', '山の家は さむくて、さびしくて……'],
+  ['町の人のうわさ', '妖怪たちは、夜になると にぎやかな音のする方へ 集まってくるらしいよ'],
+  ['巻物の切れはし', 'にんげんの おまつりって、たのしいらしい'],
+  ['妖怪の子のひとりごと', 'ちょうちんの あかり、きれいだなあ……'],
+  ['町の人のうわさ', '妖怪が いたずらするのは、いつも おまつりの前の日なんだって'],
+  ['親玉の大だぬき', 'ほんとうは……おまつりに、まぜてほしかっただけなんだ'],
+];
+const CH_TINT = [null, 'rgba(120,190,255,.06)', 'rgba(255,150,70,.08)', 'rgba(255,215,130,.10)',
+  'rgba(150,210,140,.08)', 'rgba(255,180,110,.10)', 'rgba(255,255,255,.35)', 'rgba(190,170,240,.10)'];
+// ふだんの敵やボスとかぶる名物は「親分」にする（大きさと色で見分ける）
+const OYABUN = { '美濃': 'karakasa', '近江': 'daiyokai' };
+// 自動プレイで「最善でも落としやすい」と分かった国の大妖怪だけ手で調整する倍率
+// 大妖怪の硬さ（国ごと・自動プレイで調整済み）。上乗せなし・最善で、章の前半は9割以上クリア。
+// 章の後半は「上乗せなしでも抜けられる国」と「上乗せがないと抜けられない国」（第3・4章は1国、第5〜8章は2国）を混ぜ、
+// （2026-09-30 人数が上下する波のゲート表・仲間の箱・大人数の攻撃にしたあとに取り直し。壱岐はチュートリアルなので軽め）
+// 上乗せありなら全部抜けられる硬さにしてある。表にない国は下の式で決まる
+const BOSS_TUNED = {
+  '壱岐': 0.3, '対馬': 2.451, '隠岐': 3.885, '佐渡': 3.086, '志摩': 2.419, '飛騨': 3.439, '安房': 2.963, '淡路': 2.732,
+  '伊豆': 2.624, '若狭': 2.588, '因幡': 2.884, '土佐': 2.77, '伊賀': 3.631, '伯耆': 3.938, '丹後': 4.329, '石見': 3.631,
+  '但馬': 3.086, '日向': 2.292, '讃岐': 3.486, '長門': 3.992, '豊前': 3.885, '和泉': 3.486, '駿河': 3.004, '周防': 3.214,
+  '大隅': 2.923, '備中': 3.17, '阿波': 4.957, '美作': 3.533, '備後': 3.885, '出雲': 3.439, '安芸': 4.76, '相模': 3.68,
+  '能登': 2.845, '備前': 3.581, '山城': 3.004, '甲斐': 3.129, '河内': 2.171, '紀伊': 5.232, '遠江': 5.376, '丹波': 3.73,
+  '筑後': 4.76, '薩摩': 3.086, '三河': 3.302, '肥前': 3.214, '出羽': 3.214, '筑前': 3.781, '肥後': 2.884, '加賀': 4.329,
+  '摂津': 4.57, '播磨': 4.824, '伊予': 3.045, '下野': 3.73, '上総': 2.884, '越中': 3.258, '越後': 3.885, '下総': 3.258,
+  '信濃': 3.885, '豊後': 4.57, '大和': 5.45, '上野': 3.004, '越前': 3.581, '常陸': 2.963, '美濃': 3.302, '伊勢': 3.214,
+  '尾張': 3.533, '武蔵': 4.271, '近江': 3.004, '陸奥': 3.885,
+};
+const CH_BOSS = [0.6, 0.67, 0.74, 1.1, 1.05, 0.85, 1.17, 1.09];
+// 章ごとのふだんの敵の強さの倍率（章が進むほど難しくなるようにそろえる）
+const CH_ENEMY = [1, 1, 1, 1, 1, 0.95, 1.1, 1.02];
+const OYABUN_LINE = { '美濃': 'からかさおばけのふるさとは、ここ美濃だった！', '近江': '大だぬきのふるさとは、ここ近江だった！' };
+const CONTINUES = 3;               // 1つの章で使えるコンティニュー
+const CARRY_UNIT = 30;             // クリア時の人数 ÷ これ ＝ 次の面への上乗せ（30人で+1）
+const CARRY_MAX = 10;              // 上乗せの上限
+const START_N = 15;                // 各面の出発人数（上乗せはこの上に足す）
+// 最初は1人から仲間を増やしていく：壱岐1人→対馬5人→隠岐10人→以降15人
+const START_BY_G = { 1: 1, 2: 5, 3: 10 };
+const startBase = g => START_BY_G[g] || START_N;
+// チュートリアル面（壱岐）のゲートは「増える」だけ。良い方を選ぶと多く増える（クリア時20〜30人の見込み）
+const TUTORIAL_GATES = [['+1', '+2'], ['×2', '+1'], ['+2', '+3'], ['+3', '×2'], ['+3', '+5'], ['+4', '+6']];
+
+// ゲート：+ − × ÷ と、外れ（+0 ×1 ÷1）、片側だけ（もう片側は何もない）
+const gateKind = g => !g ? 'none' : (g.op === '+' && g.v === 0) || (g.op !== '+' && g.op !== '−' && g.v === 1) ? 'dud'
+  : (g.op === '+' || g.op === '×') ? 'good' : 'bad';
+function gateResult(g, n) {
+  if (!g) return n;
+  if (g.op === '+') return n + g.v;
+  if (g.op === '×') return n * g.v;
+  if (g.op === '−') return n - g.v;
+  return Math.max(1, Math.floor(n / g.v));    // ÷ は切り捨て。ただし最低1人は残す
+}
+function parseGate(t) { return t == null ? null : { op: t[0], v: +t.slice(1) }; }
+const nice = v => v < 20 ? Math.max(1, Math.round(v)) : v < 100 ? Math.round(v / 5) * 5 : Math.round(v / 10) * 10;
+
+// ゲートの並びは「難しさの目盛り」と固定の種から作る（毎回同じ・左右も固定）。
+// 上乗せなしで最善に進んだときの想定人数 n を追いかけながら、その人数で損得が決まる値を置く。
+// ひっかけ（見た目は良さそうで実は損）は1面に1つ。−は人数の7割まで、÷は最低1人（実行時にも守る）
+function genGates(g, lvl, seed) {
+  const R = mulberry32(g * 104729 + 7 + (seed || 0) * 7919), rr = (a, b) => a + R() * (b - a), rp = a => a[(R() * a.length) | 0];
+  // 1面6枚で「ぐんと増える → 危ない（減る） → 取り返す」の波を2〜3回つくる。最善なら最後は増えて終わる。
+  // 危ない場面の厳しさ hard：0＝片方は増える（まちがえると大きく減る）／1＝撃って救える小さな−と÷2 ／2〜3＝どちらも減る（−か半分か）
+  const hard = lvl < 1.6 ? 0 : lvl < 2.8 ? 1 : lvl < 4.6 ? 2 : 3;
+  const plan = ['up', R() < 0.5 ? 'up' : 'risk', 'risk', 'bigUp', 'risk', 'up'];
+  const trapAt = g <= 2 ? -1 : rp([0, 1, 5].filter(k => plan[k] === 'up'));
+  // 危ない場面の中身（出てくる順に使う）。撃って救える小さな−は1面に1回まで
+  const risks = [['goodBad', 'mild', 'goodBad'], ['save', 'mild', 'goodBad'], ['save', 'badBad', 'badBad'], ['badBad', 'save', 'badBad']][hard].sort(() => R() - 0.5);
+  let n = START_N;
+  const out = [];
+  for (let i = 0; i < 6; i++) {
+    let pair;
+    if (i === trapAt) {
+      // ひっかけ：人数によって、見た目が大きい方が損になる
+      pair = n >= 20 && R() < 0.5 ? ['+' + nice(n * 0.8), '×2'] : ['×2', '+' + nice(n * 1.2 + 2)];
+    } else if (plan[i] === 'up') {
+      const m = n >= 20 && R() < 0.5 ? 3 : 2;
+      pair = rp([
+        ['+' + nice(n * (m - 1) * rr(0.7, 1.3)), '×' + m],
+        ['+' + nice(n * rr(0.35, 0.6)), '+' + nice(n * rr(0.9, 1.5))],
+        ['+' + nice(rr(4, 8) + n * 0.3), '×' + m],
+      ]);
+    } else if (plan[i] === 'bigUp') {
+      pair = R() < 0.6 ? ['×3', '+' + nice(n * rr(1.3, 1.8))] : ['×2', '+' + nice(n * rr(0.5, 0.8))];
+    } else {
+      const k = risks.shift() || 'badBad';
+      if (k === 'mild') pair = ['−' + nice(n * rr(0.15, 0.25)), '÷2'];                     // 最善でも少し減る
+      else if (k === 'goodBad') pair = ['+' + nice(n * rr(0.4, 0.8)), R() < 0.5 ? '÷2' : '−' + nice(n * rr(0.4, 0.6))];
+      else if (k === 'save' && n >= 16) pair = ['−' + nice(rr(4, 9)), R() < 0.6 ? '÷2' : '−' + nice(n * rr(0.4, 0.6))];   // 小さい−は撃てば＋に変えられる
+      else pair = ['−' + nice(n * (hard >= 3 ? rr(0.35, 0.5) : rr(0.25, 0.4))), hard >= 3 && R() < 0.4 ? '÷3' : '÷2'];   // 一気に半分の怖さ
+    }
+    if (R() < 0.5) pair.reverse();
+    const res = pair.map(t => gateResult(parseGate(t), n));
+    (out.ns || (out.ns = [])).push(n);                       // このゲートの前の想定人数（実際の人数に合わせて＋−を伸び縮みさせる）
+    out.push(pair);
+    n = Math.max(3, Math.round(Math.max(...res) * 0.85));    // 次のゲートまでに妖怪で少し減る見込み
+  }
+  out.nEnd = n;                                              // 上乗せなしで最善に進んだときの、大妖怪の前の想定人数
+  return out;
+}
+// 伸びない並び（最善で進んでも想定人数が少ない）になったら、別の種で作り直す（毎回同じ結果になる）
+function goodGates(g, lvl) {
+  let best = null;
+  for (let k = 0; k < 30; k++) {
+    const gs = genGates(g, lvl, k);
+    if (gs.nEnd >= 180) return gs;
+    if (!best || gs.nEnd > best.nEnd) best = gs;
+  }
+  return best;
+}
+const STAGES = KUNI.map(([name, mb, city, lat, lon], i) => {
+  const g = i + 1, ch = CHAPTERS.find(c => g >= c.first && g < c.first + c.len);
+  const p = g - ch.first + 1, lvl = ch.n + (p - 1) / (ch.len - 1) * 1.5;   // 章が進むほど、章の中でも後ろほど難しい
+  const R = mulberry32(g * 31 + 3);
+  const items = ['rapid', 'spread', 'power', 'pierce', 'ally', 'power'];
+  if (g % 3 === 0) items[3] = ['spread', 'power'];        // ときどき2択の箱
+  return { id: name, name, mb, city, lat, lon, g, ch: ch.n, p, chLen: ch.len, lvl, items,
+    s: (1 + 0.12 * (ch.n - 1) + 0.05 * (p - 1)) * CH_ENEMY[ch.n - 1],   // 敵の強さ
+    cs: 1 + 0.05 * (ch.n - 1) + 0.02 * (p - 1),            // 敵の数
+    boss: BOSS_TUNED[name] || (0.5 + 0.5 * (p - 1) / (ch.len - 1)) * CH_BOSS[ch.n - 1],            // 大妖怪の硬さ（章の前半は上乗せなしでも倒せる・後半は上乗せが要る）
+    gates: g === 1 ? Object.assign(TUTORIAL_GATES.map(p => p.slice()), { nEnd: 25 }) : goodGates(g, lvl),
+    tutorial: g === 1, oyabun: OYABUN[name] || null, tint: CH_TINT[ch.n - 1] };
+});
+const LAST = STAGES.length;
+const stageOf = n => STAGES[n - 1];
+const chapterOf = n => CHAPTERS[stageOf(n).ch - 1];
+
+// 進み具合（章をクリアしたら保存）：どこまで開いたか・次の章に持ちこす上乗せ・クリアした国
+const PROG = loadJSON('ninjaGate.progress', { open: 1, carry: {}, cleared: {} });
+const saveProg = () => saveJSON('ninjaGate.progress', PROG);
+
+const ITEMS = {
+  rapid: { label: '連投', get: '連投アップ' },
+  spread: { label: '横ならび', get: '手裏剣の列が広がった' },
+  power: { label: '大手裏剣', get: '手裏剣が大きくなった' },
+  pierce: { label: '貫通', get: '貫通 +1' },
+  ally: { label: '仲間', get: '' },
+};
+function buildStage(st) {
+  const s = stageOf(st).s;
+  const ev = [];
+  const CY = 6, L = 8.2, k = L / 7;           // 流れを遅くした分、1周を少し長く（画面上の間隔はだいたい保つ・1面は+10%）
+  const items = stageOf(st).items;
+  for (let c = 0; c < CY; c++) {
+    const b = c * L;
+    ev.push({ t: b + 0.2 * k, type: 'gate', c });
+    ev.push({ t: b + 1.4 * k, type: 'wave', c });
+    ev.push({ t: b + 3.6 * k, type: 'box', c, item: items[c] });
+    ev.push({ t: b + 4.8 * k, type: 'wave', c, brute: c >= 2 });
+    if (c === 1 || c === 3) ev.push({ t: b + 6.6 * k, type: 'box', c: c + 10, item: 'ally' });   // 面の途中にも「仲間」の箱
+  }
+  ev.push({ t: CY * L + 0.5, type: 'warn' });
+  ev.push({ t: CY * L + 2.5, type: 'boss' });
+  return { ev, s, len: CY * L + 2.5 };
+}
+
+
+// ===== 出現 =====
+function spawnWave(c, brute, cx, y0, countMul) {
+  const s = G.s;
+  const T = stageOf(G.stage).tutorial;
+  // 数は章・面ごとにゆるやかに増やす。チュートリアル（壱岐）は少なく・遅く・弱く、後ろの波ほど少しずつ増える
+  const count = T ? Math.round(1 + c * 1.2) : Math.round((5 + c * 1.2) * stageOf(G.stage).cs * (countMul || 1));
+  // 耐久は「いまの手裏剣で何発か」で決める。序盤3〜5発・終盤10〜14発（壱岐は2発）
+  const shotsTo = T ? 2 : (3 + 9 * (G.stage - 1) / (LAST - 1) + c * 0.35) * ENEMY_HP;
+  const hp = bulletDmg(shotK()) * shotsTo;
+  const spd = T ? 0.65 : 1;
+  cx = cx != null ? cx : srand(90, 270);
+  const wid = srand(140, 230);
+  const cols = Math.max(4, Math.round(wid / 24));
+  const top = y0 != null ? y0 : -20;
+  let rows = 0;
+  for (let i = 0; i < count; i++) {
+    const col = i % cols, row = (i / cols) | 0;
+    rows = row + 1;
+    G.enemies.push({
+      id: G.nextId++, kind: 'grunt', type: spick(YOKAI),
+      x: clamp(cx - wid / 2 + (col + 0.5) * wid / cols + srand(-4, 4), 14, LW - 14),
+      y: top - row * 24 - srand(0, 6),
+      r: 9, hp, maxHp: hp, power: 1, sp: srand(86, 100) * spd, ph: srand(0, 6.28), hit: 0, atkI: T ? 1.4 : 0.8, atkN: 1,
+    });
+  }
+  if (brute && !T) for (let q = 0; q < (c >= 4 && stageOf(G.stage).lvl >= 3 ? 2 : 1); q++) {
+    const bhp = hp * 5;
+    G.enemies.push({
+      id: G.nextId++, kind: 'brute',
+      x: clamp(cx + srand(-60, 60), 40, LW - 40), y: top - rows * 24 - 30,
+      r: 20, hp: bhp, maxHp: bhp, power: Math.round((2 + c) * s * 0.7), sp: 66, ph: srand(0, 6.28), hit: 0, atkI: 0.5, atkN: Math.max(2, Math.round((2 + c) * s * 0.18)),
+    });
+  }
+}
+
+const YOKAI = ['hitotsume', 'karakasa', 'chochin'];
+const SCROLL = 95;                  // 前に進む速さ（画面が流れる速さ・論理px/秒）。2026-09-30 に 130→95
+const CASTLE_Y = 196;               // 城の下端（ここに止まる）
+let BOSS_K = 60;
+let ENEMY_HP = 1;                  // ふだんの敵の体力の全体倍率（調整用）                  // 大妖怪の硬さ＝想定人数×この値×面ごとの倍率（自動プレイで調整）
+function runEvent(e) {
+  if (e.type === 'gate') {
+    const GS = stageOf(G.stage).gates, [l, r] = GS[e.c].map(parseGate);
+    // ＋と−の値は、表の想定人数と実際の人数の比で伸び縮みさせる（大人数でも「−」がちゃんと怖く、「＋」がちゃんとうれしい）
+    if (GS.ns) { const k = clamp(G.N / GS.ns[e.c], 0.5, 4); for (const g of [l, r]) if (g && (g.op === '+' || g.op === '−') && g.v > 0) g.v = Math.max(1, nice(g.v * k)); }
+    // 1回の − で全滅しないよう、出た時点の人数の7割までにおさえる（最善の道すじでは表の値のまま）
+    for (const g of [l, r]) if (g && g.op === '−') g.v = Math.max(1, Math.min(g.v, Math.floor(G.N * 0.7)));
+    G.gates.push({ y: -40, h: 58, l, r, done: false, chosen: 0, fade: 1, step: gateStep(), acc: [0, 0], up: [0, 0], pop: [0, 0] });
+  } else if (e.type === 'wave') {
+    spawnWave(e.c, e.brute);
+  } else if (e.type === 'box') {
+    const hp = boxHp();
+    if (stageOf(G.stage).tutorial) G.boxes.push({ x: LW / 2, y: -30, w: 46, h: 46, hp, maxHp: hp, item: e.item, hit: 0 });   // 壱岐は隊の正面に流す
+    else if (Array.isArray(e.item)) {
+      // 2択の箱：左右に出て、片方を壊すともう片方は消える
+      const grp = G.nextId++;
+      e.item.forEach((it, i) => G.boxes.push({ x: i ? 270 : 90, y: -30, w: 46, h: 46, hp, maxHp: hp, item: it, hit: 0, grp }));
+    } else G.boxes.push({ x: (e.c % 2 ? 270 : 90) + srand(-25, 25), y: -30, w: 46, h: 46, hp, maxHp: hp, item: e.item, hit: 0 });
+  } else if (e.type === 'warn') {
+    G.warn = 2.2;
+    G.castle = { y: -10 };
+  } else if (e.type === 'boss') {
+    const S = stageOf(G.stage);
+    // 硬さは「上乗せなしで最善に進んだときの想定人数」での手裏剣の強さ（列の数×√人数）から決める
+    const nE = Math.max(20, S.gates.nEnd);
+    const hp = Math.round(BOSS_K * shotCols(nE) * Math.sqrt(nE) * S.boss);
+    G.boss = { x: 180, y: CASTLE_Y - 30, r: Math.min(70, 46 + S.p * 2 + (S.oyabun ? 10 : 0)), hp, maxHp: hp, sp: 11, cd: 2.5, hit: 0, t: 0 };
+    Snd.play('bossIn', { vol: 0.8, pitch: 0 });
+    Snd.bgm('bgmBoss');
+  }
+}
+
+// ===== 計測（GA4） =====
+function track(ev, p) { try { if (typeof gtag === 'function') gtag('event', ev, p || {}); } catch (e) {} }
+
+// ===== 開始・終了 =====
+// 章の最初から。コンティニューは章ごとに3回。上乗せは前の章から持ちこす
+function newRun(ch) {
+  const C = CHAPTERS[ch - 1];
+  track('game_start', { chapter: ch });
+  G.score = 0; G.continues = CONTINUES; G.lastClear = null;
+  G.carry = PROG.carry[ch] || 0; G.carryStage = C.first;
+  showOverlay('intro', { stage: C.first });
+}
+function startStage(st) {
+  G.stageScore0 = G.score;
+  G.stage = st;
+  const S = buildStage(st);
+  G.events = S.ev; G.evi = 0; G.stageLen = S.len; G.s = S.s;
+  G.startN = startBase(st) + (G.carryStage === st ? G.carry : 0);    // 上乗せ込み。やり直しても同じ
+  G.t = 0; G.N = G.startN; G.x = G.tx = 180; G.reason = '';
+  G.rate = SHOT_RATE; G.pierce = 0; G.dmgMul = 1; G.spread = 0; G.fireCd = 0.3; G.colCd = null;
+  { const S = stageOf(st); for (const k of [...YOKAI, 'koni', S.oyabun || bossArt(S.id) || 'daiyokai']) whiteOf(k); }   // 白く光る絵は最初に作っておく（初めて当たった瞬間に引っかからない）
+  srng = mulberry32(st * 7919 + 13);
+  G.chapter = stageOf(st).ch;
+  G.bullets = []; G.enemies = []; G.gates = []; G.boxes = []; G.parts = []; G.texts = [];
+  G.boss = null; G.castle = null; G.scroll = SCROLL; G.vx = 0; G.slashes = []; G.meleeCd = 0; G.warn = 0; G.shake = 0; G.bonus = 0; G.pulse = 0;
+  G.tips = stageOf(st).tutorial && !loadJSON('ninjaGate.tutorialDone', false) ? { gate: 0, box: 0, enemy: 0 } : null; G.tip = null;
+  G.state = 'play';
+  hideOverlay();
+  Snd.bgm(true);
+}
+
+function gameOver(reason) {
+  if (G.state !== 'play') return;
+  track('game_over', { chapter: stageOf(G.stage).ch, stage: G.stage, kuni: stageOf(G.stage).name });
+  G.state = 'dying'; G.endT = 1.0; G.reason = reason; G.shake = 1;
+  G.bullets = [];
+  poof(G.x, G.squadY, 2.2);
+  Snd.bgm(false); Snd.play('over', { vol: 0.7, pitch: 0 });
+}
+
+function stageClear() {
+  G.state = 'clearing'; G.endT = 1.6;
+  const b = G.boss;
+  for (let i = 0; i < 5; i++) poof(b.x + rand(-40, 40), b.y + rand(-40, 40), 2);
+  floatText(b.x, b.y, '大妖怪が退散した', C.orangeD, 22);
+  G.score += Math.round(3000 * G.s);
+  for (const e of G.enemies) { poof(e.x, e.y, 0.8); G.score += e.kind === 'brute' ? 60 : 10; }
+  G.enemies = [];
+  G.bonus = G.N * 5;
+  G.score += G.bonus;
+  G.shake = 1;
+  Snd.play('taisanBig', { vol: 0.8 });
+  Snd.bgm(false); Snd.play('clear', { vol: 0.7, pitch: 0 });
+}
+
+// ===== 入力 =====
+const keys = {};
+let drag = null;
+const SENS = 1.25;
+// 左右の最大速度（論理px/秒）。人数の0.3乗で遅くなる：端から端まで 15人≈0.8秒・100人≈1.4秒・300人≈2秒・1000人以上≈2.8秒
+const MOVE_K = 923, MOVE_P = 0.295, MOVE_MIN = 119, MOVE_MAX = 600;   // （下で差し替え）
+// 2026-09-30：大人数ほどはっきり重く。端から端まで 15人≈0.9秒・50人≈1.6秒・100人≈2.3秒・300人≈3.5秒・1000人以上≈5秒
+const MOVE2_K = 1350, MOVE2_P = 0.47, MOVE2_MIN = 68;
+const moveSpeed = n => Math.min(MOVE_MAX, Math.max(MOVE2_MIN, MOVE2_K * Math.pow(Math.max(1, n), -MOVE2_P)));
+const moveHeavy = n => 0.06 + 0.07 * Math.log10(Math.max(1, n));   // 最高速に届くまでの秒数（大人数ほど重い）
+cv.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  if (e.pointerType === 'mouse') { followMouse(e); return; }
+  try { cv.setPointerCapture(e.pointerId); } catch (_) {}
+  drag = { id: e.pointerId, sx: e.clientX, x0: G.tx };
+});
+cv.addEventListener('pointermove', e => {
+  if (e.pointerType === 'mouse') { followMouse(e); return; }
+  if (drag && e.pointerId === drag.id) {
+    G.tx = clamp(drag.x0 + (e.clientX - drag.sx) / scale * SENS, 14, LW - 14);
+  }
+});
+const endDrag = e => { if (drag && e.pointerId === drag.id) drag = null; };
+cv.addEventListener('pointerup', endDrag);
+cv.addEventListener('pointercancel', endDrag);
+function followMouse(e) {
+  if (G.state !== 'play') return;
+  const r = cv.getBoundingClientRect();
+  G.tx = clamp((e.clientX - r.left) / scale, 14, LW - 14);
+}
+document.addEventListener('touchmove', e => {
+  if (e.target.closest && e.target.closest('.sheet-body')) return;   // 説明が長い時だけシート内はスクロール可
+  e.preventDefault();
+}, { passive: false });
+document.addEventListener('gesturestart', e => e.preventDefault());
+document.addEventListener('dblclick', e => e.preventDefault());
+document.addEventListener('contextmenu', e => e.preventDefault());
+window.addEventListener('keydown', e => {
+  if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' '].includes(e.key)) e.preventDefault();
+  keys[e.key] = true;
+  if ((e.key === 'Enter' || e.key === ' ') && !ov.hidden) {
+    const p = sheet.querySelector('.primary');
+    if (p) p.click();
+  } else if ((e.key === 'Escape' || e.key === 'p') && G.state === 'play') pause();
+});
+window.addEventListener('keyup', e => { keys[e.key] = false; });
+pauseBtn.addEventListener('click', () => pause());
+document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+window.addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
+
+function pause() {
+  if (G.state !== 'play' && G.state !== 'countdown') return;
+  G.state = 'paused';
+  drag = null; for (const k in keys) keys[k] = false;
+  Snd.suspend();
+  showOverlay('pause');
+}
+function resume() {
+  // いきなり妖怪が来ないよう、3・2・1 のあとで再開
+  ov.hidden = true;
+  G.state = 'countdown'; G.cdT = 3;
+  Snd.resume();
+}
+
+// ===== 更新 =====
+// 手裏剣：最初は隊の真ん中から1列だけ・ゆっくり。人数が増えると列が増え、1本の強さもゆるやかに上がる
+const SHOT_RATE = 0.45;            // 投げる間隔（秒）。「連投」で縮む
+let SHOT_POW = 0.6;                // 1本の強さ ＝ これ × √人数 × 大手裏剣の倍率
+const shotCols = n => n >= 240 ? 5 : n >= 120 ? 4 : n >= 60 ? 3 : n >= 30 ? 2 : 1;   // 1秒あたりの威力の基準（大妖怪の硬さもこれで決まる）
+// 見た目は「細かく・多く・速く」：投げる間隔は G.rate × RATE_F、列は人数に応じて最大12列。
+// 1本の威力は、1秒あたりの総威力が基準（shotCols 列 × G.rate 間隔）と同じになるように割る
+const RATE_F = 0.2;
+const COL_AT = [1, 8, 15, 25, 40, 60, 90, 130, 180, 250, 350, 480];   // この人数で列が1本ずつ増える
+const volleyCols = n => COL_AT.filter(v => n >= v).length || 1;
+const SHOT_SPEED = 820;
+const MAX_BULLETS = 260;
+// 投げる瞬間は列ごとにずらす（一斉に投げず、途切れない流れに見せる）。1回ごとに間隔を±15%ゆらす
+const SHOT_JITTER = 0.15;
+const shotK = () => Math.min(16, volleyCols(G.N) + 2 * G.spread);   // 「横ならび」で列が2本ずつ増える（最大2回）
+function bulletDmg(k) {
+  const base = Math.max(shotCols(G.N), G.spread ? 1 + 2 * G.spread : 1);   // 1秒あたりの総威力の基準（横ならびで増える分も前の拡散と同じ）
+  return SHOT_POW * Math.sqrt(Math.max(1, G.N)) * G.dmgMul * base / k * RATE_F;
+}
+function shotLayout() {
+  const k = shotK();
+  if (!G.colCd || G.colCd.length !== k) {
+    // 列の数が変わったら、位相をずらして並べ直す（j/k だけずらす）
+    const old = G.colCd || [];
+    G.colCd = Array.from({ length: k }, (_, j) => old[j] != null ? old[j] : G.rate * RATE_F * (j + 0.5) / k);
+  }
+  return k;
+}
+const colSpan = k => Math.min(squadHalf() * 1.4 + G.spread * 24, (k - 1) * 9);   // 列の幅は隊の幅に収める（横ならびの分だけ外へ広がる）
+function fireCol(j, k) {
+  if (G.bullets.length >= MAX_BULLETS) return;
+  const span = colSpan(k);
+  const f = k === 1 ? 0.5 : j / (k - 1);
+  G.bullets.push({                                // 攻撃は正面だけ：全部まっすぐ前へ
+    x: clamp(G.x + (f - 0.5) * span, 4, LW - 4), y: G.squadY - squadHalf() * 0.45 - 8,
+    vx: 0, vy: -SHOT_SPEED,
+    dmg: bulletDmg(k), p: G.pierce, hits: null, rot: Math.random() * 6.28,
+  });
+  // 音は同じ音の最短間隔と同時発音の上限で間引く（本数が増えても鳴りすぎない）
+  Snd.play('shuriken', { vol: 0.3, minGap: 0.11 });
+}
+// 箱の硬さ：「いまの火力で、箱の前にいれば約1秒で壊れる」。壱岐は2〜3本
+function boxHp() {
+  const k = shotK(), d = bulletDmg(k);
+  if (stageOf(G.stage).tutorial) return d * 2.5;
+  const gap = k > 1 ? colSpan(k) / (k - 1) : 99;
+  const onBox = Math.min(k, 1 + Math.floor(40 / gap));   // 箱の幅に入る列の数
+  return d * onBox / (G.rate * RATE_F) * BOX_T;
+}
+const BOX_T = 1.0;
+// ゲートを撃つと数字が1ずつ良くなる（＋は増える・−は減って0をこえると＋に）。×と÷は変わらない（弾は素通り）。
+// 1つ上げるのに要る量＝「いまの火力の GATE_T 秒分」。画面にいる間ずっと正面から撃てば＋8前後。上限は元の値から＋GATE_MAX
+const GATE_T = 0.6, GATE_MAX = 15;
+function gateStep() { const k = shotK(); return bulletDmg(k) * k / (G.rate * RATE_F) * GATE_T; }
+const GATE_W = LW / 2 - 20, gateX = side => side ? LW / 2 + 4 : 16;
+function shootGate(g, side, b) {
+  const gt = side ? g.r : g.l;
+  if (!gt || (gt.op !== '+' && gt.op !== '−') || g.up[side] >= GATE_MAX) return false;   // 素通り
+  g.acc[side] += b.dmg;
+  Snd.play('hit', { vol: 0.1, minGap: 0.08, pitch: 0.1, rate: 1.3, soft: true });
+  while (g.acc[side] >= g.step && g.up[side] < GATE_MAX) {
+    g.acc[side] -= g.step; g.up[side]++;
+    if (gt.op === '+') gt.v++;
+    else if (--gt.v <= 0) { gt.op = '+'; gt.v = -gt.v; }   // −1 → 0 → ＋1
+    g.pop[side] = 0.16;
+    Snd.play('gateUp', { vol: 0.22, minGap: 0.1, pitch: 0, rate: 1 + Math.min(0.5, g.up[side] * 0.03) });
+  }
+  return true;
+}
+const shotsLeft = b => Math.max(1, Math.ceil(b.hp / bulletDmg(shotK()) - 1e-6));
+
+function burst(x, y, col, n, sp) {
+  for (let i = 0; i < n && G.parts.length < 500; i++) {
+    const a = rand(0, 6.283), v = rand(0.3, 1) * sp;
+    G.parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: rand(0.3, 0.7), max: 0.7, col, r: rand(1.5, 3.5) });
+  }
+}
+// 退散の演出：煙がふわっと広がり、葉っぱが数枚舞う（血や飛び散りは描かない）
+function poof(x, y, size) {
+  const n = Math.round(4 + size * 3);
+  for (let i = 0; i < n && G.parts.length < 500; i++) {
+    const a = rand(0, 6.283), v = rand(20, 60) * size;
+    G.parts.push({ kind: 'smoke', x: x + rand(-4, 4) * size, y: y + rand(-4, 4) * size, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 15,
+      life: rand(0.35, 0.6), max: 0.6, col: C.smoke, r: rand(3, 6) * size, grow: rand(8, 14) * size });
+  }
+  const leaves = size >= 1 ? Math.round(size * 2) : (Math.random() < 0.5 ? 1 : 0);
+  for (let i = 0; i < leaves && G.parts.length < 500; i++) {
+    G.parts.push({ kind: 'leaf', x, y, vx: rand(-70, 70), vy: rand(-90, -30), life: rand(0.6, 0.9), max: 0.9,
+      col: C.leaf, r: rand(3, 4.5), rot: rand(0, 6.28), spin: rand(-8, 8) });
+  }
+}
+// 妖怪の退散（手裏剣でも近接でも同じ）
+function killEnemy(e) {
+  if (e.dead) return;
+  e.dead = true;
+  poof(e.x, e.y, e.kind === 'brute' ? 1.6 : 0.8);   // 退散（ぽんっと煙と葉っぱ）
+  if (e.kind === 'brute') { floatText(e.x, e.y - 20, 'ぽんっ', C.sub, 16); Snd.play('taisanBig', { vol: 0.6 }); }
+  else Snd.play('taisan', { vol: 0.45, minGap: 0.05 });
+  addScore(e.kind === 'brute' ? 60 : 10);
+  if (G.state === 'play' && Math.random() < (e.kind === 'brute' ? 0.5 : 0.04)) {   // ときどき改心して仲間に
+    const k = e.kind === 'brute' ? 3 + ((Math.random() * 3) | 0) : 1 + ((Math.random() * 2) | 0);
+    G.N += k; G.pulse = Math.max(G.pulse, 0.8); G.pulseUp = true;
+    floatText(e.x, e.y - 14, '仲間になった！+' + k, C.good, 13);
+  }
+}
+const MAX_ATTACH = 8;                 // くっつける数の上限（壱岐は1）
+const MELEE_I = 0.22, MELEE_K = 1.25;  // 近接：間隔（秒）と強さ（× √人数 × 大手裏剣の倍率 ／秒）
+const attachY = () => G.squadY - squadHalf() * 0.45 - 26;   // くっつく高さ（手裏剣が出る位置より上＝手裏剣も当たる）
+// 当たったところに小さな煙（数は上限つき）
+function hitPuff(x, y) {
+  if (G.parts.length > 380) return;
+  G.parts.push({ kind: 'smoke', x: x + rand(-3, 3), y: y + rand(-3, 3), vx: rand(-20, 20), vy: rand(-30, -5),
+    life: 0.25, max: 0.25, col: C.smoke, r: rand(2, 3.5), grow: 10 });
+}
+function floatText(x, y, txt, col, size) {
+  if (G.texts.length > 24) G.texts.shift();
+  G.texts.push({ x: clamp(x, 70, LW - 70), y, txt, col, size: size || 18, life: 1.1 });
+}
+function addScore(v) { G.score += v; }
+
+function changeN(nv, x, y) {
+  const d = Math.floor(nv) - G.N;
+  const before = G.N;
+  G.N = clamp(Math.floor(nv), 0, 9999);
+  if (G.N > (G.maxN || 0)) G.maxN = G.N;
+  G.pulse = d > 0 ? Math.min(2.2, 1 + d / Math.max(10, before)) : 1.2; G.pulseUp = d > 0;   // 大きく増えるほど大きく弾む
+  if (d !== 0) floatText(x, y, (d > 0 ? '+' : '−') + Math.abs(d), d > 0 ? C.good : C.bad, 22);
+}
+
+function applyGate(g) {
+  const k = gateKind(g);
+  if (k === 'none') return;                       // 何もない側を通った
+  if (k === 'dud') { floatText(G.x, G.squadY - 50, 'そのまま', C.dudD, 20); G.pulse = 1; return; }
+  changeN(gateResult(g, G.N), G.x, G.squadY - 50);
+  burst(G.x, G.squadY - 20, k === 'good' ? C.good : C.bad, 18, 180);
+  Snd.play(k === 'good' ? 'gateUp' : 'gateDown', { vol: 0.7 });
+  if (G.N <= 0) gameOver('ゲートで仲間がいなくなりました');
+}
+
+function breakBox(b) {
+  burst(b.x, b.y, C.crate, 20, 200);
+  addScore(50);
+  Snd.play('item', { vol: 0.7, pitch: 0 });
+  const it = b.item;
+  if (it === 'rapid') G.rate = Math.max(0.15, G.rate * 0.8);
+  else if (it === 'power') G.dmgMul = Math.min(4, G.dmgMul + 0.5);
+  else if (it === 'pierce') G.pierce = Math.min(3, G.pierce + 1);
+  else if (it === 'spread') G.spread = Math.min(2, G.spread + 1);
+  if (b.grp) {                                   // 2択の箱：もう片方は消える
+    for (let i = G.boxes.length - 1; i >= 0; i--) if (G.boxes[i].grp === b.grp) { poof(G.boxes[i].x, G.boxes[i].y, 1); G.boxes.splice(i, 1); }
+  }
+  if (it === 'ally') changeN(G.N + Math.max(5, Math.round(G.N * 0.25)), b.x, b.y);   // 仲間＋いまの4分の1（最低5人）
+  else floatText(b.x, b.y, ITEMS[it].get, C.orangeD, 19);
+}
+
+function step(dt) {
+  G.bgT += dt;
+  groundOff += (G.state === 'play' ? (G.scroll == null ? SCROLL : G.scroll) : G.state === 'title' ? 40 : 0) * dt;
+  // 演出系はどの状態でも進める
+  for (let i = G.parts.length - 1; i >= 0; i--) {
+    const p = G.parts[i];
+    p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= 0.94; p.vy *= 0.94; p.life -= dt;
+    if (p.kind === 'smoke') p.r += p.grow * dt;
+    else if (p.kind === 'leaf') { p.vy += 160 * dt; p.rot += p.spin * dt; }
+    if (p.life <= 0) G.parts.splice(i, 1);
+  }
+  for (let i = G.texts.length - 1; i >= 0; i--) {
+    const t = G.texts[i];
+    t.y -= 40 * dt; t.life -= dt;
+    if (t.life <= 0) G.texts.splice(i, 1);
+  }
+  G.shake = Math.max(0, G.shake - dt * 3);
+  G.pulse = Math.max(0, G.pulse - dt * 4);
+
+  if (G.state === 'countdown') {
+    G.cdT -= dt;
+    if (G.cdT <= 0) { G.state = 'play'; pauseBtn.classList.add('on'); }
+    return;
+  }
+  if (G.state === 'dying' || G.state === 'clearing') {
+    G.endT -= dt;
+    if (G.boss && G.state === 'clearing') G.boss = null;
+    if (G.endT <= 0) finish();
+    return;
+  }
+  if (G.state !== 'play') return;
+
+  G.t += dt;
+  while (G.evi < G.events.length && G.events[G.evi].t <= G.t) runEvent(G.events[G.evi++]);
+  // チュートリアルのひとこと（1行・2秒くらい。プレイは止めない）
+  if (G.tips) {
+    // 前のひとことが消えてから、まだ出していないものを1つずつ
+    const show = (k, msg) => { if (!G.tips[k] && !G.tip) { G.tips[k] = 1; G.tip = { msg, t: 2.2 }; } };
+    if (G.gates.some(g => g.y > 60)) show('gate', 'ゲートをくぐると仲間がふえる！');
+    if (G.tips.gate && G.boxes.some(b => b.y > 60)) show('box', '箱をこわすと手裏剣が強くなる');
+    if (G.tips.gate && G.enemies.some(e => e.y > 40)) show('enemy', '左右に動かしてよけよう');
+  }
+  if (G.tip && (G.tip.t -= dt) <= 0) G.tip = null;
+  G.warn = Math.max(0, G.warn - dt);
+
+  // 移動（キー）
+  const kv = (keys.ArrowRight || keys.d || keys.D ? 1 : 0) - (keys.ArrowLeft || keys.a || keys.A ? 1 : 0);
+  if (kv) { G.tx = clamp(G.x + kv * 40, 14, LW - 14); G.keyMove = true; }
+  else if (G.keyMove) { G.tx = G.x; G.keyMove = false; }   // キーを離したらその場で止まる
+  // 指（目標）へ追いかける。人数が多いほど遅く、ただし減り方はゆるやかにし下限を設ける
+  {
+    const dx = G.tx - G.x, vmax = moveSpeed(G.N), acc = vmax / moveHeavy(G.N);
+    // 止まる地点をこえないように、残りの距離から出せる速さまでにおさえる（指を離せばその場で止まる）
+    const want = Math.sign(dx) * Math.min(vmax, Math.sqrt(2 * acc * 1.6 * Math.abs(dx)));
+    G.vx += clamp(want - G.vx, -acc * 1.6 * dt, acc * dt * (Math.sign(want) === Math.sign(G.vx) || !G.vx ? 1 : 1.6));
+    if (Math.abs(dx) < 0.5 && Math.abs(G.vx) < 8) { G.x = G.tx; G.vx = 0; }
+    else G.x = clamp(G.x + G.vx * dt, 14, LW - 14);
+  }
+
+  // 射撃
+  if ((G.fireCd -= dt) <= 0) {            // 出発直後の少しの間だけ待つ
+    const k = shotLayout();
+    for (let j = 0; j < k; j++) {
+      G.colCd[j] -= dt;
+      if (G.colCd[j] <= 0) { G.colCd[j] = Math.max(0, G.colCd[j] + G.rate * RATE_F * (1 + rand(-SHOT_JITTER, SHOT_JITTER))); fireCol(j, k); }
+    }
+  }
+
+  const scroll = G.castle && G.castle.y >= CASTLE_Y ? 0 : SCROLL;
+  if (G.castle) G.castle.y = Math.min(CASTLE_Y, G.castle.y + SCROLL * dt);
+  G.scroll = scroll;
+
+  // ゲート
+  for (let i = G.gates.length - 1; i >= 0; i--) {
+    const g = G.gates[i];
+    g.y += SCROLL * dt;
+    if (!g.done && g.y >= G.squadY) {
+      g.done = true;
+      g.chosen = G.x < LW / 2 ? 1 : 2;
+      applyGate(g.chosen === 1 ? g.l : g.r);
+      if (G.state !== 'play') return;
+    }
+    if (g.done) g.fade = Math.max(0, g.fade - dt * 2.5);
+    if (g.pop) { g.pop[0] = Math.max(0, g.pop[0] - dt); g.pop[1] = Math.max(0, g.pop[1] - dt); }
+    if (g.y > LH + 60) G.gates.splice(i, 1);
+  }
+  // 箱
+  for (let i = G.boxes.length - 1; i >= 0; i--) {
+    const b = G.boxes[i];
+    b.y += SCROLL * dt; b.hit = Math.max(0, b.hit - dt);
+    if (b.y > LH + 40) G.boxes.splice(i, 1);
+  }
+  // 敵
+  // 隊の高さまで来た妖怪は、隊の前にくっついて居続け、一定の間隔で「ポカッ」と叩く（倒すまで離れない）
+  const aY = attachY(), cap = stageOf(G.stage).tutorial ? 1 : MAX_ATTACH;
+  let nAtt = 0;
+  for (const e of G.enemies) if (e.att) nAtt++;
+  for (const e of G.enemies) {
+    e.hit = Math.max(0, e.hit - dt); e.bump = Math.max(0, (e.bump || 0) - dt);
+    if (e.att) {
+      // 隊が動くと、少し遅れてついてくる（逃げ切れない）
+      e.x += (clamp(G.x + e.ox, 12, LW - 12) - e.x) * Math.min(1, dt * 3.5);
+      e.y += (aY - (e.kind === 'brute' ? 10 : 0) - e.y) * Math.min(1, dt * 8);
+      if ((e.atk -= dt) <= 0) {
+        e.atk += e.atkI; e.bump = 0.14;
+        const lost = Math.min(e.atkN, G.N);
+        poof(clamp(G.x + e.ox * 0.6, 14, LW - 14), G.squadY - 4, e.kind === 'brute' ? 0.9 : 0.5);   // 叩かれた仲間はドロンと煙で消える
+        G.shake = Math.min(1, G.shake + (e.kind === 'brute' ? 0.2 : 0.08));
+        if (Math.random() < 0.45) floatText(e.x, e.y - 18, 'ポカッ', C.ink, 13);
+        Snd.play('hit', { vol: 0.24, minGap: 0.1, pitch: 0.1, rate: 0.7 });
+        G.N = Math.max(0, G.N - lost); G.pulse = Math.max(G.pulse, 0.6); G.pulseUp = false;
+        if (G.N <= 0) { gameOver('妖怪に押し切られました'); return; }
+      }
+      continue;
+    }
+    e.y += e.sp * dt;
+    e.x = clamp(e.x + Math.sin(G.t * 2 + e.ph) * 10 * dt, 10, LW - 10);
+    if (e.y >= aY - (e.kind === 'brute' ? 10 : 0)) {
+      if (nAtt < cap) {
+        e.att = true; nAtt++;
+        if (!stageOf(G.stage).tutorial) e.atkN = Math.max(e.atkN, Math.round(G.N / (e.kind === 'brute' ? 45 : 140)));   // 大人数ほど目に見えて減る
+        const R = squadHalf();
+        e.ox = clamp(e.x - G.x, -R - 6, R + 6);
+        e.atk = 0.35;                              // くっついてすぐ1回目
+      } else e.y = aY - 26 - (e.kind === 'brute' ? 12 : 0);   // くっつける数の上限：あふれた分は少し上で待つ
+    }
+  }
+  // こちらの近接：先頭の忍者が、くっついた妖怪を自動で斬る（人数が多いほど強い・同時に斬る数も増える）
+  if ((G.meleeCd -= dt) <= 0 && nAtt) {
+    G.meleeCd = MELEE_I;
+    const tg = G.enemies.filter(e => e.att && !e.dead).sort((a, b) => Math.abs(a.x - G.x) - Math.abs(b.x - G.x)).slice(0, Math.min(4, 1 + Math.floor(G.N / 25)));
+    const dmg = MELEE_K * Math.sqrt(Math.max(1, G.N)) * G.dmgMul * MELEE_I;
+    for (const e of tg) {
+      e.hp -= dmg; e.hit = 0.08;
+      if (G.slashes.length < 12) G.slashes.push({ x: e.x, y: e.y, life: 0.16, dir: Math.random() < 0.5 ? 1 : -1 });
+      if (e.hp <= 0) killEnemy(e);
+    }
+    Snd.play('hit', { vol: 0.2, minGap: 0.09, pitch: 0.2, rate: 1.6, soft: true });
+  }
+  for (let i = G.slashes.length - 1; i >= 0; i--) if ((G.slashes[i].life -= dt) <= 0) G.slashes.splice(i, 1);
+  // 大妖怪
+  const B = G.boss;
+  if (B) {
+    B.t += dt;
+    B.y += B.sp * dt;
+    B.x = 180 + Math.sin(B.t * 0.7) * 60;          // 大人数でも追える幅
+    B.hit = Math.max(0, B.hit - dt); B.pop = Math.max(0, (B.pop || 0) - dt);
+    B.cd -= dt;
+    if (B.cd <= 0) { B.cd = 3.2; if (!stageOf(G.stage).tutorial) spawnWave(4, false, B.x, B.y + 30, 0.45); }   // チュートリアルの大妖怪は手下を呼ばない
+    if (B.y + B.r * 0.6 >= G.squadY) { gameOver('大妖怪に城から押し出されました'); return; }
+  }
+
+  // 手裏剣
+  for (let i = G.bullets.length - 1; i >= 0; i--) {
+    const b = G.bullets[i];
+    b.x += b.vx * dt; b.y += b.vy * dt; b.rot += 18 * dt;
+    if (b.y < -20 || b.x < -20 || b.x > LW + 20) { G.bullets.splice(i, 1); continue; }
+    let dead = false;
+    for (const g of G.gates) {
+      if (g.done || Math.abs(b.y - g.y) > g.h / 2) continue;
+      const side = b.x < LW / 2 ? 0 : 1, gx = gateX(side);
+      if (b.x < gx || b.x > gx + GATE_W) continue;
+      if (shootGate(g, side, b)) { dead = true; break; }
+    }
+    if (!dead) for (let j = G.boxes.length - 1; j >= 0; j--) {
+      const x = G.boxes[j];
+      if (x.grp && (G.x < LW / 2) !== (x.x < LW / 2)) continue;   // 2択の箱は隊のいる側だけが壊れる（横に広い弾幕の端で反対側を取らない）
+      if (Math.abs(b.x - x.x) < x.w / 2 && Math.abs(b.y - x.y) < x.h / 2) {
+        x.hp -= b.dmg; x.hit = 0.07; dead = true;
+        Snd.play('hit', { vol: 0.14, minGap: 0.07, pitch: 0.15, soft: true });
+        if (x.hp <= 0) { G.boxes.splice(j, 1); breakBox(x); }
+        break;
+      }
+    }
+    if (!dead && B && B.hp > 0) {
+      const dx = b.x - B.x, dy = b.y - B.y;
+      if (dx * dx + dy * dy < B.r * B.r) {
+        B.hp -= b.dmg; B.hit = 0.07; dead = true;
+        if (!(B.pop > 0)) B.pop = 0.15;
+        if (Math.random() < 0.25) hitPuff(b.x, b.y);
+        Snd.play('hit', { vol: 0.16, minGap: 0.07, pitch: 0.15, soft: true });
+        if (B.hp <= 0) { stageClear(); return; }
+      }
+    }
+    if (!dead) {
+      for (const e of G.enemies) {
+        if (e.dead) continue;
+        if (b.hits && b.hits.includes(e.id)) continue;
+        const dx = b.x - e.x, dy = b.y - e.y, rr = e.r + 3;
+        if (dx * dx + dy * dy < rr * rr) {
+          e.hp -= b.dmg; e.hit = 0.07;
+          if (!e.att) e.y -= e.kind === 'brute' ? 0.8 : 2.2;      // 少し押し戻す（くっついた妖怪は近接で）
+          if (Math.random() < 0.3) hitPuff(b.x, b.y);
+          Snd.play('hit', { vol: 0.16, minGap: 0.07, pitch: 0.15, soft: true });
+          if (e.hp <= 0) killEnemy(e);
+          if (b.p > 0) { b.p--; (b.hits || (b.hits = [])).push(e.id); }
+          else { dead = true; break; }
+        }
+      }
+    }
+    if (dead) G.bullets.splice(i, 1);
+  }
+  if (G.enemies.some(e => e.dead)) G.enemies = G.enemies.filter(e => !e.dead);
+}
+
+function finish() {
+  const cleared = G.state === 'clearing';
+  G.state = 'result';
+  let newBest = false;
+  if (G.score > G.best) { G.best = G.score; saveBest(G.best); newBest = true; }
+  if (!cleared) { showOverlay('over', { newBest }); return; }
+  const S = stageOf(G.stage), CH = chapterOf(G.stage);
+  const stageBest = (SAVE.stageBest[S.id] || 0) < G.N;
+  if (stageBest) { SAVE.stageBest[S.id] = G.N; saveJSON('ninjaGate.stageBest', SAVE.stageBest); }
+  PROG.cleared[S.id] = 1;
+  if (S.tutorial) saveJSON('ninjaGate.tutorialDone', true);
+  // 次の面への上乗せ（次の面だけに効く。やり直しても残る）
+  G.lastClear = { stage: G.stage, n: G.N };
+  G.carry = Math.min(CARRY_MAX, Math.floor(G.N / CARRY_UNIT)); G.carryStage = G.stage + 1;
+  const chEnd = S.p === S.chLen;
+  let newFrag = false, edoBest = false;
+  if (chEnd) {
+    // 章クリア：巻物の切れはし・次の章を開く・上乗せを持ちこす
+    const key = 'ch' + CH.n;
+    newFrag = !SAVE.scrolls.includes(key);
+    if (newFrag) { SAVE.scrolls.push(key); saveJSON('ninjaGate.scrolls2', SAVE.scrolls); }
+    if (CH.n < CHAPTERS.length) { PROG.open = Math.max(PROG.open, CH.n + 1); PROG.carry[CH.n + 1] = G.carry; }
+    if (G.stage === LAST && G.N > SAVE.edoBest) { SAVE.edoBest = G.N; saveJSON('ninjaGate.mutsuBest', G.N); edoBest = true; }
+  }
+  saveProg();
+  track('stage_clear', { chapter: CH.n, stage: G.stage, kuni: S.name, ninja: G.N });
+  if (chEnd) track('chapter_clear', { chapter: CH.n, ninja: G.N });
+  if (G.stage === LAST) track('ending', { ninja: G.N, score: G.score });
+  showOverlay('clear', { newBest, newFrag, stageBest, edoBest, chEnd });
+}
+
+// ===== 描画 =====
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function circle(x, y, r) { ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); }
+function text(s, x, y, size, col, align, weight) {
+  ctx.font = `${weight || 800} ${size}px ${FONT}`;
+  ctx.textAlign = align || 'left';
+  ctx.fillStyle = col;
+  ctx.fillText(s, x, y);
+}
+
+let groundOff = 0;
+function drawBg() {
+  if (IMG.ground) {
+    const im = IMG.ground, h = im.height * LW / im.width, o = groundOff % h;
+    for (let y = o - h; y < LH; y += h) ctx.drawImage(im, 0, y, LW, h);
+    return;
+  }
+  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, LW, LH);
+  ctx.fillStyle = C.road; ctx.fillRect(12, 0, LW - 24, LH);
+  const off = groundOff % 40;
+  ctx.fillStyle = C.edge;
+  for (let y = -40 + off; y < LH; y += 40) {
+    ctx.fillRect(0, y, 12, 20);
+    ctx.fillRect(LW - 12, y, 12, 20);
+  }
+  ctx.fillStyle = C.dash;
+  const off2 = groundOff % 64;
+  for (let y = -64 + off2; y < LH; y += 64) ctx.fillRect(LW / 2 - 2, y, 4, 30);
+}
+
+function drawCastle(cs) {
+  const b = cs.y;                     // 下端
+  // 石垣（左右いっぱい）
+  ctx.fillStyle = C.stone; ctx.fillRect(0, b - 34, LW, 34);
+  ctx.strokeStyle = '#d4b98c'; ctx.lineWidth = 1.5;
+  for (let y = b - 34; y < b; y += 11) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(LW, y); ctx.stroke(); }
+  if (IMG.castle) { const h = 270 * IMG.castle.height / IMG.castle.width; sprite('castle', LW / 2, b - h / 2 + 2, 270, h); return; }
+  // 本体の石垣（台形）
+  ctx.fillStyle = '#dcc095';
+  ctx.beginPath(); ctx.moveTo(LW / 2 - 105, b); ctx.lineTo(LW / 2 - 88, b - 46); ctx.lineTo(LW / 2 + 88, b - 46); ctx.lineTo(LW / 2 + 105, b); ctx.closePath(); ctx.fill();
+  // 壁と屋根（2段）
+  const tier = (w, y, h) => {
+    ctx.fillStyle = C.wall; ctx.fillRect(LW / 2 - w / 2, y - h, w, h);
+    ctx.strokeStyle = '#ead6b6'; ctx.lineWidth = 1; ctx.strokeRect(LW / 2 - w / 2, y - h, w, h);
+    ctx.fillStyle = C.roof;
+    ctx.beginPath(); ctx.moveTo(LW / 2 - w / 2 - 16, y - h + 2); ctx.lineTo(LW / 2 - w / 2 + 8, y - h - 16); ctx.lineTo(LW / 2 + w / 2 - 8, y - h - 16); ctx.lineTo(LW / 2 + w / 2 + 16, y - h + 2); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = C.roofD; ctx.fillRect(LW / 2 - w / 2 - 16, y - h, w + 32, 3);
+  };
+  tier(150, b - 46, 30);
+  tier(104, b - 92, 26);
+  // てっぺんの飾り
+  ctx.fillStyle = C.gold;
+  circle(LW / 2 - 30, b - 138, 4); ctx.fill(); circle(LW / 2 + 30, b - 138, 4); ctx.fill();
+  // 窓
+  ctx.fillStyle = C.roofD;
+  for (const dx of [-44, -14, 16, 46]) ctx.fillRect(LW / 2 + dx - 4, b - 66, 8, 8);
+  for (const dx of [-22, 14]) ctx.fillRect(LW / 2 + dx - 4, b - 110, 8, 8);
+  // 門
+  ctx.fillStyle = C.roofD; roundRect(LW / 2 - 22, b - 40, 44, 40, 8); ctx.fill();
+  ctx.fillStyle = C.kara; ctx.fillRect(LW / 2 - 20, b - 30, 40, 30);
+  ctx.fillStyle = C.karaD; ctx.fillRect(LW / 2 - 1, b - 30, 2, 30);
+}
+
+function drawGate(g) {
+  const top = g.y - g.h / 2;
+  ctx.globalAlpha = g.done ? g.fade : 1;
+  const COL = { good: [C.good, C.goodD, '59,130,196'], bad: [C.bad, C.badD, '224,86,63'], dud: [C.dud, C.dudD, '160,151,141'] };
+  const sides = [[g.l, 16, 1], [g.r, LW / 2 + 4, 2]];
+  for (const [gt, x, id] of sides) {
+    const w = LW / 2 - 20, k = gateKind(gt), pp = g.pop ? g.pop[id - 1] : 0;
+    if (k === 'none') continue;                  // 何もない側
+    const [, dark, rgb] = COL[k];
+    ctx.fillStyle = `rgba(${rgb},${g.done && g.chosen === id ? 1 : 0.8})`;
+    roundRect(x, top, w, g.h, 8); ctx.fill();
+    ctx.fillStyle = dark; ctx.fillRect(x, top, w, 5);
+    if (pp > 0) { ctx.fillStyle = `rgba(255,255,255,${pp * 2.2})`; roundRect(x, top, w, g.h, 8); ctx.fill(); }
+    const label = gt.op === '+' && gt.v === 0 ? '0' : gt.op + gt.v;
+    const sc = pp > 0 ? 1 + 0.28 * Math.sin(Math.PI * (1 - pp / 0.16)) : 1;   // 数字が変わった瞬間に弾む
+    ctx.save(); ctx.translate(x + w / 2, g.y + 12); ctx.scale(sc, sc);
+    ctx.font = `800 32px ${FONT}`;
+    ctx.textAlign = 'center';
+    ctx.lineWidth = 4; ctx.strokeStyle = dark; ctx.lineJoin = 'round';
+    ctx.strokeText(label, 0, 0);
+    ctx.fillStyle = '#fff';
+    ctx.fillText(label, 0, 0);
+    ctx.restore();
+  }
+  // 柱
+  ctx.fillStyle = C.ink;
+  for (const px of [10, LW / 2 - 3, LW - 16]) { roundRect(px, top - 8, 6, g.h + 16, 3); ctx.fill(); }
+  ctx.globalAlpha = 1;
+}
+
+function drawBox(b) {
+  const x = b.x - b.w / 2, y = b.y - b.h / 2;
+  if (!sprite('crate', b.x, b.y, b.w, b.h)) {
+    ctx.fillStyle = C.crate;
+    roundRect(x, y, b.w, b.h, 5); ctx.fill();
+    ctx.lineWidth = 3; ctx.strokeStyle = C.crateD; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x + 4, y + 4); ctx.lineTo(x + b.w - 4, y + b.h - 4); ctx.lineWidth = 2; ctx.stroke();
+  }
+  if (b.hit > 0) { ctx.fillStyle = 'rgba(255,255,255,.5)'; roundRect(x, y, b.w, b.h, 5); ctx.fill(); }
+  // 名前の帯
+  const label = ITEMS[b.item].label;
+  ctx.font = `800 15px ${FONT}`;
+  const lw = Math.max(b.w + 8, ctx.measureText(label).width + 14);
+  ctx.fillStyle = C.ink; roundRect(b.x - lw / 2, b.y - 11, lw, 22, 5); ctx.fill();
+  text(label, b.x, b.y + 6, 15, '#fff', 'center');
+  // 耐久
+  const r = clamp(b.hp / b.maxHp, 0, 1);
+  ctx.fillStyle = 'rgba(74,53,38,.25)'; ctx.fillRect(x, y - 9, b.w, 5);
+  ctx.fillStyle = C.orange; ctx.fillRect(x, y - 9, b.w * r, 5);
+  text(`あと${shotsLeft(b)}発`, b.x, y - 14, 12, C.ink, 'center', 800);
+}
+
+function drawEnemy(e) {
+  const flash = e.hit > 0, jx = flash ? rand(-1.5, 1.5) : 0, x = e.x + jx, y = e.y + (e.bump ? Math.sin(e.bump / 0.14 * Math.PI) * 6 : 0);
+  if (e.kind === 'brute') {
+    // 子鬼：朱色のまるい体、ツノ1本、とらじまの腰巻き
+    if (sprite('koni', x, y - 2, 48, 50)) { if (flash) spriteFlash('koni', x, y - 2, 48, 50, 0.6); } else {
+      ctx.fillStyle = C.horn;
+      ctx.beginPath(); ctx.moveTo(x - 4, y - 18); ctx.lineTo(x, y - 29); ctx.lineTo(x + 4, y - 18); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = C.koni;
+      for (const s of [-1, 1]) { circle(x + s * 11, y + 16, 5); ctx.fill(); }
+      circle(x, y, 20); ctx.fill();
+      ctx.lineWidth = 2.5; ctx.strokeStyle = C.koniD; ctx.stroke();
+      ctx.fillStyle = C.tora; roundRect(x - 15, y + 7, 30, 8, 3); ctx.fill();
+      ctx.fillStyle = C.ink; for (const dx of [-9, -1, 7]) ctx.fillRect(x + dx, y + 7, 2.5, 8);
+      ctx.fillStyle = '#fff'; for (const s of [-1, 1]) { circle(x + s * 7, y - 4, 3.6); ctx.fill(); }
+      ctx.fillStyle = C.ink; for (const s of [-1, 1]) { circle(x + s * 7, y - 3.5, 1.8); ctx.fill(); }
+      ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.arc(x + 1, y + 1, 4, 0.15 * Math.PI, 0.7 * Math.PI); ctx.stroke();
+      ctx.lineCap = 'butt';
+    }
+    const r = clamp(e.hp / e.maxHp, 0, 1), by = y - 32;
+    ctx.fillStyle = 'rgba(74,53,38,.25)'; ctx.fillRect(e.x - 20, by, 40, 5);
+    ctx.fillStyle = C.bad; ctx.fillRect(e.x - 20, by, 40 * r, 5);
+    return;
+  }
+  if (e.hp < e.maxHp) {
+    const r = clamp(e.hp / e.maxHp, 0, 1);
+    ctx.fillStyle = 'rgba(74,53,38,.25)'; ctx.fillRect(e.x - 10, y - 21, 20, 3);
+    ctx.fillStyle = C.bad; ctx.fillRect(e.x - 10, y - 21, 20 * r, 3);
+  }
+  if (sprite(e.type, x, y - 3, 28, 30)) { if (flash) spriteFlash(e.type, x, y - 3, 28, 30, 0.7); return; }
+  if (e.type === 'karakasa') {
+    // からかさおばけ：和傘に一つ目、一本足
+    ctx.strokeStyle = C.kasaD; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + 11); ctx.stroke();
+    ctx.fillStyle = C.kasa; ctx.beginPath(); ctx.arc(x, y + 2, 11, Math.PI, 0); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = C.kasaD; ctx.lineWidth = 1.3; ctx.stroke();
+    ctx.fillStyle = C.kasaY; ctx.beginPath(); ctx.moveTo(x, y - 9); ctx.lineTo(x - 4, y + 2); ctx.lineTo(x + 4, y + 2); ctx.closePath(); ctx.fill();
+    eyes1(x, y - 3, 3.2);
+  } else if (e.type === 'chochin') {
+    // ちょうちんおばけ：クリームのちょうちん、とぼけ顔
+    ctx.fillStyle = C.chochin; roundRect(x - 8, y - 9, 16, 19, 7); ctx.fill();
+    ctx.strokeStyle = C.chochinD; ctx.lineWidth = 1.2; ctx.stroke();
+    ctx.beginPath(); for (const dy of [-4, 1, 6]) { ctx.moveTo(x - 7, y + dy); ctx.lineTo(x + 7, y + dy); } ctx.stroke();
+    ctx.fillStyle = C.chochinD; ctx.fillRect(x - 5, y - 11, 10, 3); ctx.fillRect(x - 5, y + 9, 10, 3);
+    ctx.fillStyle = C.ink; circle(x - 3, y - 1, 1.3); ctx.fill(); circle(x + 3, y - 1, 1.3); ctx.fill();
+    ctx.fillStyle = '#f08a8a'; roundRect(x - 2.5, y + 3, 5, 2.4, 1.2); ctx.fill();
+  } else {
+    // 一つ目小僧：まるい頭に大きな一つ目
+    ctx.fillStyle = C.hito; roundRect(x - 7, y + 2, 14, 9, 4); ctx.fill();
+    circle(x, y - 2, 8.5); ctx.fillStyle = C.skin; ctx.fill();
+    ctx.lineWidth = 1.3; ctx.strokeStyle = C.hitoD; ctx.stroke();
+    eyes1(x, y - 2, 3.8);
+  }
+}
+function eyes1(x, y, r) {
+  ctx.fillStyle = '#fff'; circle(x, y, r); ctx.fill();
+  ctx.lineWidth = 1; ctx.strokeStyle = C.ink; ctx.stroke();
+  ctx.fillStyle = C.ink; circle(x, y + r * 0.2, r * 0.5); ctx.fill();
+}
+
+function drawBoss(B) {
+  const { r } = B, x = B.x + (B.hit > 0 ? rand(-2, 2) : 0), y = B.y;
+  ctx.fillStyle = 'rgba(74,53,38,.12)';
+  ctx.beginPath(); ctx.ellipse(B.x, y + r * 0.9, r * 0.9, r * 0.25, 0, 0, 6.2832); ctx.fill();
+  const S = stageOf(G.stage);
+  if (S.oyabun) {
+    ctx.fillStyle = 'rgba(242,193,78,.35)'; circle(x, y, r * 1.15); ctx.fill();
+    ctx.lineWidth = 4; ctx.strokeStyle = C.gold; ctx.stroke();
+  }
+  const key = S.oyabun || bossArt(S.id) || 'daiyokai';
+  if (sprite(key, x, y - 8, r * 2.5, r * 2.5)) {
+    if (B.hit > 0) spriteFlash(key, x, y - 8, r * 2.5, r * 2.5, 0.45);
+    // 頭の上の体力バー
+    // 体力バー＋「残り ○○」の数字（上部の帯にかからない高さにおさえる）。当たって数字が減ると少し弾む
+    const hr = clamp(B.hp / B.maxHp, 0, 1), bw = Math.max(108, r * 1.7), bh = 15, by = Math.max(74, y - r * 1.25 - 18);
+    ctx.fillStyle = 'rgba(74,53,38,.55)'; roundRect(B.x - bw / 2, by, bw, bh, 7.5); ctx.fill();
+    ctx.fillStyle = C.bad; roundRect(B.x - bw / 2, by, Math.max(bh, bw * hr), bh, 7.5); ctx.fill();
+    const k = B.pop > 0 ? 1 + 0.22 * Math.sin(Math.PI * (1 - B.pop / 0.15)) : 1;
+    ctx.save(); ctx.translate(B.x, by + bh / 2 + 4.5 * k); ctx.scale(k, k);
+    ctx.font = `800 12px ${FONT}`; ctx.textAlign = 'center';
+    const label = '残り ' + Math.max(1, Math.ceil(B.hp)).toLocaleString('ja-JP');
+    ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.strokeStyle = 'rgba(74,53,38,.85)'; ctx.strokeText(label, 0, 0);
+    ctx.fillStyle = '#fff'; ctx.fillText(label, 0, 0);
+    ctx.restore();
+    return;
+  }
+  // 大だぬき：まるい体、耳、クリームのおなかと顔、頭に葉っぱ
+  ctx.fillStyle = C.tanuki;
+  for (const s of [-1, 1]) { circle(x + s * 30, y - r + 10, 11); ctx.fill(); }
+  circle(x, y, r); ctx.fill();
+  ctx.lineWidth = 3; ctx.strokeStyle = C.tanukiD; ctx.stroke();
+  ctx.fillStyle = C.tanukiL;
+  ctx.beginPath(); ctx.ellipse(x, y + 22, 30, 24, 0, 0, 6.2832); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(x, y - 10, 30, 20, 0, 0, 6.2832); ctx.fill();
+  ctx.fillStyle = C.tanuki;
+  for (const s of [-1, 1]) { ctx.beginPath(); ctx.ellipse(x + s * 13, y - 12, 9, 7, 0, 0, 6.2832); ctx.fill(); }
+  ctx.fillStyle = '#fff'; for (const s of [-1, 1]) { circle(x + s * 13, y - 12, 4.5); ctx.fill(); }
+  ctx.fillStyle = C.ink; for (const s of [-1, 1]) { circle(x + s * 13, y - 11, 2.4); ctx.fill(); }
+  ctx.fillStyle = C.tanukiD; circle(x, y - 3, 4); ctx.fill();
+  ctx.fillStyle = C.leaf; ctx.save(); ctx.translate(x + 4, y - r - 6); ctx.rotate(-0.5);
+  ctx.beginPath(); ctx.ellipse(0, 0, 14, 7, 0, 0, 6.2832); ctx.fill();
+  ctx.strokeStyle = C.leafD; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(-12, 0); ctx.lineTo(12, 0); ctx.stroke(); ctx.restore();
+}
+
+function drawShuriken(b, size) {
+  if (sprite('shuriken', b.x, b.y, size * 2.4, size * 2.4, b.rot)) return;
+  const c = Math.cos(b.rot), s = Math.sin(b.rot);
+  ctx.beginPath();
+  for (let k = 0; k < 8; k++) {
+    const rr = k % 2 ? size * 0.35 : size;
+    const a = k * Math.PI / 4;
+    const px = Math.cos(a) * rr, py = Math.sin(a) * rr;
+    const X = b.x + px * c - py * s, Y = b.y + px * s + py * c;
+    k ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+  }
+  ctx.closePath(); ctx.fill();
+}
+
+function drawNinja(x, y) {
+  if (sprite('ninja', x, y - 3, 18, 24)) return;
+  circle(x, y + 1, 5.2); ctx.fillStyle = C.ninja; ctx.fill();
+  circle(x, y - 4, 3.8); ctx.fill();
+  ctx.fillStyle = C.skin; ctx.fillRect(x - 2.8, y - 5, 5.6, 1.9);
+  ctx.fillStyle = C.orange; ctx.fillRect(x - 3.8, y - 7.2, 7.6, 1.5); ctx.fillRect(x + 3, y - 7.2, 3.5, 1.2);
+}
+function drawLeader(kind, x, y) {
+  if (sprite(kind, x, y - 4, 24, 30)) return;
+  if (kind === 'wolf') {
+    circle(x, y + 2, 7); ctx.fillStyle = C.wolf; ctx.fill(); ctx.lineWidth = 1.3; ctx.strokeStyle = C.wolfD; ctx.stroke();
+    ctx.fillStyle = C.wolf;
+    for (const s of [-1, 1]) { ctx.beginPath(); ctx.moveTo(x + s * 2, y - 9); ctx.lineTo(x + s * 6.5, y - 15); ctx.lineTo(x + s * 7, y - 6); ctx.fill(); }
+    circle(x, y - 6, 5.2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#fff'; roundRect(x - 3, y - 5, 6, 4, 2); ctx.fill();
+    ctx.fillStyle = C.ink; circle(x - 2.2, y - 7.2, 0.9); ctx.fill(); circle(x + 2.2, y - 7.2, 0.9); ctx.fill();
+    ctx.fillStyle = C.orange; roundRect(x - 6, y - 1.5, 12, 3.4, 1.7); ctx.fill(); ctx.fillRect(x + 3, y - 1, 3, 7);
+    return;
+  }
+  const body = kind === 'boy' ? C.orange : C.girl, bodyD = kind === 'boy' ? C.orangeD : C.girlD;
+  circle(x, y + 2, 7); ctx.fillStyle = body; ctx.fill(); ctx.lineWidth = 1.3; ctx.strokeStyle = bodyD; ctx.stroke();
+  circle(x, y - 6, 5.2); ctx.fillStyle = C.skin; ctx.fill();
+  ctx.fillStyle = kind === 'boy' ? C.boyHair : C.girlHair;
+  ctx.beginPath(); ctx.arc(x, y - 6.5, 5.4, Math.PI * 1.05, Math.PI * 1.95); ctx.closePath(); ctx.fill();
+  if (kind === 'girl') { circle(x, y - 12, 2.6); ctx.fill(); }
+  ctx.fillStyle = kind === 'boy' ? '#fff' : C.orange; ctx.fillRect(x - 5.3, y - 8.8, 10.6, 1.8);
+  if (kind === 'boy') { ctx.fillRect(x + 4.5, y - 8.8, 4, 1.4); }
+  ctx.fillStyle = C.ink; circle(x - 2, y - 5, 0.9); ctx.fill(); circle(x + 2, y - 5, 0.9); ctx.fill();
+}
+
+function drawSquad(y0, n) {
+  n = n == null ? G.N : n;
+  const show = Math.min(n, 90), sp = G.state === 'title' ? 1 : squadSpread();
+  for (const i of ORDER) {
+    if (i < 3 || i >= show) continue;
+    drawNinja(G.x + OFF[i][0] * sp, y0 + OFF[i][1] * sp);
+  }
+  // シリーズの3人は先頭に少し大きく
+  const front = y0 - squadHalf() * 0.5;
+  for (let i = 0; i < Math.min(3, show); i++) {
+    const [kind, dx, dy] = LEADERS[i];
+    ctx.save(); ctx.translate(G.x + dx * 1.5, front + dy); ctx.scale(1.5, 1.5);
+    drawLeader(kind, 0, 0);
+    ctx.restore();
+  }
+  // 人数
+  const R = squadHalf();
+  const ly = y0 + R * 0.6 + 22;
+  const s = 1 + G.pulse * 0.3;
+  const label = String(n);
+  ctx.font = `800 ${18 * s}px ${FONT}`;
+  const w = Math.max(40, ctx.measureText(label).width + 22);
+  ctx.fillStyle = G.pulse > 0.3 ? (G.pulseUp ? C.goodD : C.badD) : C.ink; roundRect(G.x - w / 2, ly - 14 * s, w, 26 * s, 13 * s); ctx.fill();
+  text(label, G.x, ly + 5 * s, 18 * s, '#fff', 'center');
+}
+
+function drawHud() {
+  ctx.fillStyle = 'rgba(255,247,234,.82)'; ctx.fillRect(0, 0, LW, 68);
+  { const S = stageOf(G.stage); text(`第${S.ch}章 ${S.p}/${S.chLen}　${S.name}`, 12, 22, 12, C.sub, 'left', 700); }
+  text(G.score.toLocaleString(), 12, 44, 22, C.ink, 'left');
+  const bx = 12, bw = LW - 24 - 52, by = 56;
+  ctx.fillStyle = C.edge; roundRect(bx, by, bw, 6, 3); ctx.fill();
+  if (G.boss) {
+    const r = clamp(G.boss.hp / G.boss.maxHp, 0, 1);
+    ctx.fillStyle = C.bad; roundRect(bx, by, Math.max(6, bw * r), 6, 3); ctx.fill();
+    text(stageOf(G.stage).mb + 'の大妖怪', bx + bw, by - 6, 11, C.bad, 'right', 700);
+  } else {
+    const r = clamp(G.t / G.stageLen, 0, 1);
+    ctx.fillStyle = C.orange; roundRect(bx, by, Math.max(6, bw * r), 6, 3); ctx.fill();
+    text('城まで', bx + bw, by - 6, 11, C.sub, 'right', 700);
+  }
+  const lv = Math.round(Math.log(SHOT_RATE / G.rate) / Math.log(1.25)) + 1;
+  const st = `連投 Lv${lv}　横ならび ${G.spread}　貫通 ${G.pierce}　手裏剣 ×${G.dmgMul.toFixed(1)}`;
+  text(st, 14, LH - 14, 11, C.sub, 'left', 700);
+}
+
+function drawWarn() {
+  if (G.warn <= 0) return;
+  const a = 0.55 + 0.35 * Math.sin(G.warn * 12);
+  const y = LH * 0.4;
+  ctx.globalAlpha = a;
+  ctx.fillStyle = C.bad; ctx.fillRect(0, y, LW, 56);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = C.badD; ctx.fillRect(0, y, LW, 3); ctx.fillRect(0, y + 53, LW, 3);
+  const S = stageOf(G.stage);
+  const msg = G.stage === LAST ? '妖怪の親玉があらわれた' : S.oyabun ? (S.oyabun === 'karakasa' ? 'からかさおばけの親分' : '大だぬきの親分') + 'があらわれた' : S.mb + 'の大妖怪があらわれた';
+  ctx.font = `800 22px ${FONT}`;
+  const fs = Math.min(22, 22 * (LW - 24) / ctx.measureText(msg).width);
+  text(msg, LW / 2, y + 28 + fs * 0.4, fs, '#fff', 'center');
+}
+
+function render() {
+  ctx.setTransform(dpr * scale, 0, 0, dpr * scale, 0, 0);
+  if (G.shake > 0) ctx.translate(rand(-1, 1) * G.shake * 4, rand(-1, 1) * G.shake * 4);
+  drawBg();
+  const tint = G.state !== 'title' && stageOf(G.stage).tint;   // 章ごとに色味を少し変える
+  if (tint) { ctx.fillStyle = tint; ctx.fillRect(0, 0, LW, LH); }
+  if (G.castle) drawCastle(G.castle);
+  for (const e of G.enemies) if (!e.att) drawEnemy(e);
+  if (G.boss) drawBoss(G.boss);
+  for (const g of G.gates) drawGate(g);   // 数字が敵に隠れないよう敵より上に描く
+  for (const b of G.boxes) drawBox(b);
+  const ssz = 3.6 * (1 + (G.dmgMul - 1) * 0.35);
+  if (G.dmgMul > 1) {                         // 大手裏剣：金色の光をまとう
+    ctx.fillStyle = `rgba(242,193,78,${Math.min(0.5, 0.18 + (G.dmgMul - 1) * 0.12)})`;
+    for (const b of G.bullets) { ctx.beginPath(); ctx.arc(b.x, b.y, ssz * 1.9, 0, 6.2832); ctx.fill(); }
+  }
+  ctx.fillStyle = C.shuri;
+  for (const b of G.bullets) drawShuriken(b, ssz);
+  // 指の位置（目標）に薄い目印。隊が遅れて追いかけるのが見える
+  if ((G.state === 'play' || G.state === 'countdown') && Math.abs(G.tx - G.x) > 10) {
+    const y = G.squadY + 4;
+    ctx.globalAlpha = Math.min(0.5, Math.abs(G.tx - G.x) / 120);
+    ctx.strokeStyle = C.orange; ctx.lineWidth = 3; ctx.setLineDash([6, 6]);
+    ctx.beginPath(); ctx.moveTo(G.x, y); ctx.lineTo(G.tx, y); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.orange; circle(G.tx, y, 7); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+  if (G.state === 'title') {
+    const top = (sheet.getBoundingClientRect().top - wrap.getBoundingClientRect().top) / scale;
+    drawSquad(clamp(top - 62, 100, G.squadY), 10);
+  }
+  else if (G.N > 0) drawSquad(G.squadY);
+  for (const e of G.enemies) if (e.att) drawEnemy(e);   // くっついた妖怪は隊の前に
+  // 斬撃：白い線がさっと走る
+  if (G.slashes.length) {
+    ctx.lineCap = 'round'; ctx.strokeStyle = '#fff';
+    for (const k of G.slashes) {
+      const a = k.life / 0.16, L = 16;
+      ctx.globalAlpha = a; ctx.lineWidth = 3.5 * a + 1;
+      ctx.beginPath(); ctx.moveTo(k.x - L * k.dir, k.y - L * 0.7); ctx.quadraticCurveTo(k.x + 2 * k.dir, k.y - 4, k.x + L * k.dir, k.y + L * 0.7); ctx.stroke();
+    }
+    ctx.globalAlpha = 1; ctx.lineCap = 'butt';
+  }
+  for (const p of G.parts) {
+    const a = clamp(p.life / p.max, 0, 1);
+    if (p.kind === 'smoke') {
+      ctx.globalAlpha = a;
+      ctx.fillStyle = p.col; circle(p.x, p.y, p.r); ctx.fill();
+      ctx.lineWidth = 1.6; ctx.strokeStyle = 'rgba(150,120,95,.75)'; ctx.stroke();
+    } else if (p.kind === 'leaf') {
+      ctx.globalAlpha = a;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.col; ctx.beginPath(); ctx.ellipse(0, 0, p.r * 1.6, p.r * 0.8, 0, 0, 6.2832); ctx.fill();
+      ctx.strokeStyle = C.leafD; ctx.lineWidth = 0.8; ctx.beginPath(); ctx.moveTo(-p.r * 1.4, 0); ctx.lineTo(p.r * 1.4, 0); ctx.stroke();
+      ctx.restore();
+    } else {
+      ctx.globalAlpha = a;
+      ctx.fillStyle = p.col; circle(p.x, p.y, p.r); ctx.fill();
+    }
+  }
+  ctx.globalAlpha = 1;
+  for (const t of G.texts) {
+    ctx.globalAlpha = clamp(t.life / 0.6, 0, 1);
+    ctx.font = `800 ${t.size}px ${FONT}`; ctx.textAlign = 'center';
+    ctx.lineWidth = 4; ctx.lineJoin = 'round'; ctx.strokeStyle = '#fff7ea';
+    ctx.strokeText(t.txt, t.x, t.y); ctx.fillStyle = t.col; ctx.fillText(t.txt, t.x, t.y);
+  }
+  ctx.globalAlpha = 1;
+  if (G.state !== 'title') drawHud();
+  drawWarn();
+  if (G.tip && G.state === 'play') {
+    const y = 82, a = Math.min(1, G.tip.t / 0.4);
+    ctx.globalAlpha = a * 0.92; ctx.fillStyle = '#fff7ea'; roundRect(20, y, LW - 40, 34, 10); ctx.fill();
+    ctx.globalAlpha = a; ctx.lineWidth = 2; ctx.strokeStyle = C.orange; ctx.stroke();
+    text(G.tip.msg, LW / 2, y + 23, 16, C.ink, 'center');
+    ctx.globalAlpha = 1;
+  }
+  if (G.state === 'countdown') {
+    ctx.fillStyle = 'rgba(255,247,234,.45)'; ctx.fillRect(0, 0, LW, LH);
+    const n = Math.ceil(G.cdT), f = G.cdT - Math.floor(G.cdT);
+    ctx.font = `800 ${72 + f * 24}px ${FONT}`; ctx.textAlign = 'center';
+    ctx.lineWidth = 8; ctx.lineJoin = 'round'; ctx.strokeStyle = '#fff7ea';
+    ctx.strokeText(String(n), LW / 2, LH * 0.45); ctx.fillStyle = C.orangeD; ctx.fillText(String(n), LW / 2, LH * 0.45);
+  }
+}
+
+// ===== オーバーレイ =====
+function hideOverlay() { ov.hidden = true; pauseBtn.classList.add('on'); }
+const soundBtn = () => `<button class="btn link" data-act="music" aria-pressed="${Snd.music}">音楽：${Snd.music ? 'オン' : 'オフ'}</button><button class="btn link" data-act="se" aria-pressed="${Snd.se}">効果音：${Snd.se ? 'オン' : 'オフ'}</button>`;
+const chRange = C => `${stageOf(C.first).name}〜${stageOf(C.first + C.len - 1).name}`;
+function routeHtml(now) {
+  const C = chapterOf(now);
+  let h = '<ol class="route">';
+  for (let g = C.first; g < C.first + C.len; g++) h += `<li class="${g < now ? 'done' : g === now ? 'now' : ''}">${stageOf(g).name}</li>`;
+  return h + '</ol>';
+}
+// 日本地図：国の形は描かず、各国のだいたいの位置に点を置く。取りもどした国は色で塗る
+function mapSvg(hl) {
+  const X = lon => ((lon - 128.9) * 25).toFixed(1), Y = lat => ((41.9 - lat) * 30).toFixed(1);
+  let dots = '';
+  for (const S of STAGES) {
+    const done = PROG.cleared[S.id], open = S.ch <= PROG.open, on = hl && S.ch === hl;
+    const fill = done ? '#f08a24' : open ? '#fff7ea' : '#e2d3bb', stroke = done ? '#c9661a' : open ? '#f08a24' : '#d6c3a5';
+    dots += `<circle cx="${X(S.lon)}" cy="${Y(S.lat)}" r="${on ? 7 : 5.5}" fill="${fill}" stroke="${stroke}" stroke-width="${on ? 2.5 : 1.5}"><title>${S.name}</title></circle>`;
+  }
+  const n = Object.keys(PROG.cleared).length;
+  return `<figure class="jmap"><svg viewBox="0 0 340 340" role="img" aria-label="日本地図。取りもどした国 ${n}/${LAST}">${dots}</svg>
+<figcaption>取りもどした国 <b>${n}</b> / ${LAST}</figcaption></figure>`;
+}
+function showOverlay(kind, o) {
+  o = o || {};
+  G.overlay = kind; G.overlayOpt = o;
+  pauseBtn.classList.remove('on');
+  const best = `<div><dt>ベスト</dt><dd><b>${G.best.toLocaleString()}</b>${o.newBest ? '<span class="new">更新</span>' : ''}</dd></div>`;
+  const S = stageOf(G.stage), CH = chapterOf(G.stage);
+  let h = '', btns = '', sub = '', after = '';
+  const openCh = Math.min(PROG.open, CHAPTERS.length);
+  if (kind === 'title') {
+    h = `<p class="kicker">指1本で遊べる手裏剣シューティング</p>
+<h1>忍者ゲート突破</h1>
+<p class="lead">ある日、お城に妖怪があらわれた！</p>
+${mapSvg(openCh)}
+<dl class="rows">
+<div><dt>操作</dt><dd>画面を左右になぞって移動。手裏剣は自動で飛ぶ</dd></div>
+<div><dt>ゲート</dt><dd>左右どちらかを通る。<span class="g">青</span>は忍者が増え、<span class="r">赤</span>は減る</dd></div>
+${G.best ? best : ''}${SAVE.edoBest ? `<div><dt>陸奥まで</dt><dd><b>${SAVE.edoBest}</b>人でたどり着いた</dd></div>` : ''}
+</dl>
+<p class="note pc-only">PCはマウスを動かすか、← → キーでも移動できます。</p>
+<p class="note">音楽：PeriTune「<a href="https://peritune.com/blog/2020/09/13/ohayashi2/" target="_blank" rel="noopener">Ohayashi2</a>」「<a href="https://peritune.com/blog/2016/04/19/michikusa2/" target="_blank" rel="noopener">Michikusa2</a>」（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>・モノラル化して使用）　効果音：<a href="https://soundeffect-lab.info/" target="_blank" rel="noopener">効果音ラボ</a></p>
+<!-- WEBNINJA_UNIFIED_FOOTER -->
+<footer class="unified-footer">
+  <div class="uf-name">web忍者の砦</div>
+  <div><a href="https://kkpwebninja.com/" target="_blank" rel="noopener">本丸トップ</a>·<a href="https://kkpwebninja.com/apps" target="_blank" rel="noopener">全アプリ一覧</a>·<a href="https://privacypolicy.kkpwebninja.com/" target="_blank" rel="noopener">プライバシーポリシー</a>·<a href="https://kkpwebninja.com/otoiawase" target="_blank" rel="noopener">お問い合わせ</a>·<a href="https://x.com/kkp_webninja" target="_blank" rel="noopener">@kkp_webninja</a></div>
+  <div class="uf-copy">© 2026 web忍者の砦</div>
+</footer>`;
+    btns = `<button class="btn primary" data-act="start" data-ch="${openCh}">第${openCh}章から</button><button class="btn link" data-act="chapters">章をえらぶ</button><button class="btn link" data-act="scrolls">まきもの（${SAVE.scrolls.length}/${CHAPTERS.length}）</button>${soundBtn()}`;
+  } else if (kind === 'chapters') {
+    h = `<p class="kicker">遊ぶ章をえらぶ</p><h1>章をえらぶ</h1>${mapSvg(o.hl || openCh)}
+<dl class="rows">${CHAPTERS.map(C => {
+      const got = STAGES.filter(T => T.ch === C.n && PROG.cleared[T.id]).length, open = C.n <= PROG.open;
+      return `<div><dt>第${C.n}章</dt><dd>${chRange(C)}（${C.len}国）<br><small>${open ? `取りもどした国 ${got}/${C.len}` : 'まだ開いていない'}</small>${open ? ` <button class="btn link sm" data-act="start" data-ch="${C.n}">この章で遊ぶ</button>` : ''}</dd></div>`;
+    }).join('')}</dl>`;
+    btns = '<button class="btn primary" data-act="title">もどる</button>';
+  } else if (kind === 'intro') {
+    const T = stageOf(o.stage), TC = chapterOf(o.stage);
+    const lc = G.lastClear, carry = G.carryStage === o.stage ? G.carry : 0;
+    const carryLine = lc && lc.stage === o.stage - 1
+      ? `<p class="lead">${stageOf(lc.stage).name}のお城を ${lc.n}人で取りもどした！${carry ? ` 仲間が${carry}人ふえて出発` : ''}</p>`
+      : carry ? `<p class="lead">前の章の活やくで、仲間が${carry}人ふえて出発</p>` : '';
+    h = `<p class="kicker">第${TC.n}章　${T.p} / ${TC.len}</p>
+<h1>${T.name}のお城へ！</h1>
+${routeHtml(o.stage)}
+${carryLine}
+<dl class="rows"><div><dt>出発の人数</dt><dd><b>${startBase(o.stage) + carry}</b>人</dd></div><div><dt>名物</dt><dd>${T.mb}</dd></div></dl>`;
+    btns = `<button class="btn primary" data-act="go" data-stage="${o.stage}">出発</button>`;
+  } else if (kind === 'pause') {
+    h = `<p class="kicker">第${S.ch}章　${S.name}</p>
+<h1>一時停止</h1>`;
+    btns = `<button class="btn primary" data-act="resume">つづける</button>${soundBtn()}`;
+    sub = '<button class="btn ghost" data-act="title">タイトルへもどる</button>';
+  } else if (kind === 'clear') {
+    const k = Math.floor(G.N / CARRY_UNIT);
+    const nextHint = G.stage < LAST
+      ? (k >= CARRY_MAX ? `次の${o.chEnd ? '章' : '面'}は仲間+${CARRY_MAX}人で出発（上限）` : `あと${(k + 1) * CARRY_UNIT - G.N}人で、次の${o.chEnd ? '章' : '面'}に仲間+${k + 1}`) : '';
+    const F = FRAGS[CH.n - 1];
+    h = `<p class="kicker">第${CH.n}章　${S.p} / ${CH.len}　クリア</p>
+<h1>${S.name}のお城を取りもどした！</h1>
+<p class="lead">${S.oyabun ? OYABUN_LINE[S.name] : `名物「${S.mb}」の大妖怪が、ぽんっと退散した。`} 町の人たちが手をふっている。</p>
+${o.chEnd ? `<div class="frag"><small>第${CH.n}章クリア　${F[0]}${o.newFrag ? '（はじめて手に入れた）' : ''}</small><p>「${F[1]}」</p></div>` : ''}
+<dl class="rows">
+<div><dt>残った忍者</dt><dd><b>${G.N}</b>人${o.stageBest ? '<span class="new">この国の最高</span>' : ''}</dd></div>
+<div><dt>スコア</dt><dd><b>${G.score.toLocaleString()}</b>${o.newBest ? '<span class="new">ベスト更新</span>' : ''}</dd></div>
+</dl>
+${nextHint ? `<p class="note">${nextHint}</p>` : ''}`;
+    btns = G.stage === LAST ? '<button class="btn primary" data-act="ending">つづきを読む</button>'
+      : o.chEnd ? `<button class="btn primary" data-act="nextch">第${CH.n + 1}章へ</button>` : '<button class="btn primary" data-act="next">次へ</button>';
+    // その国の名物・旅の案内を後で入れる空き枠（今は出さない）
+    after = `<div id="omiyage" hidden data-stage="${S.id}" data-meibutsu="${S.mb}" data-city="${S.city}"></div>`;
+  } else if (kind === 'ending') {
+    h = `<p class="kicker">ぜんぶのお城を取りもどした</p>
+<h1>おしまい</h1>
+<div class="story">
+<p>陸奥のお城に朝日がのぼる。</p>
+<p>忍者隊は、妖怪たちもおまつりにさそうことにした。</p>
+<p>ちょうちんの下で、人も妖怪もいっしょにおどる。</p>
+<p>「こんどは、いたずらじゃなくて、あそびにおいでよ」</p>
+<p>――おしまい。</p>
+</div>
+<dl class="rows">
+<div><dt>陸奥まで</dt><dd><b>${G.N}</b>人でたどり着いた${o.edoBest ? '<span class="new">最高</span>' : ''}</dd></div>
+<div><dt>スコア</dt><dd><b>${G.score.toLocaleString()}</b></dd></div>
+${best}
+</dl>`;
+    btns = '<button class="btn primary" data-act="title">タイトルへ</button>';
+  } else if (kind === 'over') {
+    h = `<p class="kicker">第${CH.n}章　${S.name}</p>
+<h1>ゲームオーバー</h1>
+<p class="lead">妖怪に押し切られてしまった……。仲間をふやして、もう一度！</p>
+<p class="note">${G.reason}</p>
+<dl class="rows">
+<div><dt>スコア</dt><dd><b>${G.score.toLocaleString()}</b></dd></div>
+${best}
+</dl>`;
+    if (G.continues > 0) {
+      btns = `<button class="btn primary" data-act="retry">この面からやり直す（${S.name}のお城）のこり${G.continues}回</button>`;
+      if (S.p > 1) sub = `<button class="btn ghost" data-act="toChTop">第${CH.n}章の最初から</button>`;
+    } else {
+      btns = `<button class="btn primary" data-act="chTop">第${CH.n}章の最初から</button>`;
+      h += '<p class="note">この章のやり直しの回数を使い切りました。</p>';
+    }
+  } else if (kind === 'confirm1') {
+    h = `<h1>第${CH.n}章の最初にもどります</h1><p class="lead">よろしいですか？（取りもどした国・巻物・最高記録は消えません）</p>`;
+    btns = '<button class="btn primary" data-act="back">いいえ</button>';
+    sub = '<button class="btn ghost" data-act="chTop">はい、章の最初から</button>';
+  } else if (kind === 'scrolls') {
+    h = `<p class="kicker">集めた巻物の切れはし</p>
+<h1>まきもの</h1>
+<dl class="rows">${CHAPTERS.map(C => {
+      const got = SAVE.scrolls.includes('ch' + C.n), F = FRAGS[C.n - 1];
+      return `<div><dt>第${C.n}章</dt><dd>${got ? `「${F[1]}」<br><small>${F[0]}</small>` : '？？？'}</dd></div>`;
+    }).join('')}</dl>`;
+    btns = '<button class="btn primary" data-act="title">もどる</button>';
+  }
+  // ボタンはシートの下に固定し、説明が長くても画面外に出ないようにする
+  sheet.innerHTML = `<div class="sheet-body">${h}</div><div class="btns">${btns}</div>${sub ? `<div class="btns sub">${sub}</div>` : ''}${after}`;
+  ov.hidden = false;
+}
+function toTitle() {
+  G.state = 'title'; Snd.bgm(false);
+  G.bullets = []; G.enemies = []; G.gates = []; G.boxes = []; G.boss = null; G.castle = null; G.warn = 0; G.N = START_N; G.x = G.tx = 180; G.vx = 0; G.slashes = [];
+  showOverlay('title');
+}
+sheet.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]');
+  if (!b) return;
+  const a = b.dataset.act;
+  Snd.unlock();                                   // iPhoneは最初のタップで音を有効にする
+  if (a === 'start') { Snd.play('start', { vol: 0.7, pitch: 0 }); newRun(+b.dataset.ch); }
+  else if (a === 'go') startStage(+b.dataset.stage);
+  else if (a === 'next') showOverlay('intro', { stage: G.stage + 1 });
+  else if (a === 'nextch') newRun(chapterOf(G.stage).n + 1);
+  else if (a === 'ending') showOverlay('ending', G.overlayOpt);
+  else if (a === 'retry') { G.continues--; G.score = G.stageScore0; startStage(G.stage); }
+  else if (a === 'toChTop') showOverlay('confirm1');
+  else if (a === 'back') showOverlay('over');
+  else if (a === 'chTop') newRun(chapterOf(G.stage).n);
+  else if (a === 'resume') resume();
+  else if (a === 'chapters') showOverlay('chapters');
+  else if (a === 'scrolls') showOverlay('scrolls');
+  else if (a === 'music') { Snd.setMusic(!Snd.music); showOverlay(G.overlay, G.overlayOpt); }
+  else if (a === 'se') { Snd.setSe(!Snd.se); showOverlay(G.overlay, G.overlayOpt); }
+  else if (a === 'title') toTitle();
+});
+
+// ===== 音 =====
+// 効果音：効果音ラボ（soundeffect-lab.info）／BGM：PeriTune（peritune.com・CC BY 4.0。表示必須・改変した旨も書く）
+// どれもダウンロードして sounds/ に置いたもの（直リンクはしない）。null にすると鳴らない
+const SOUND_FILES = {
+  shuriken: 'sounds/shuriken.mp3',       // 手裏剣（弓矢を放つ ヒュッ）1斉射に1回
+  taisan: 'sounds/taisan.mp3',           // 妖怪退散（ポン）
+  taisanBig: 'sounds/taisan-big.mp3',    // 子鬼・大妖怪の退散（煙モクモク）
+  gateUp: 'sounds/gate-up.mp3',          // ゲートで増える（キラッ）
+  gateDown: 'sounds/gate-down.mp3',      // ゲートで減る（気の抜ける音）
+  item: 'sounds/item.mp3',               // 箱で強化（ステータス上昇）
+  bossIn: 'sounds/boss-in.mp3',          // 大妖怪登場（和太鼓でドドン）
+  clear: 'sounds/clear.mp3',             // クリア（ラッパのファンファーレ）
+  over: 'sounds/over.mp3',               // ゲームオーバー（ちゃんちゃん♪）
+  start: 'sounds/start.mp3',             // スタート（拍子木）
+  bgm: 'sounds/bgm_peritune_ohayashi2a_loop.mp3',      // ふだん：PeriTune「Ohayashi2」A ループ版（モノラル・低ビットレートに変換）
+  bgmBoss: 'sounds/bgm_peritune_michikusa2_loop.mp3',  // 大妖怪：PeriTune「Michikusa2」ループ版（同上）
+};
+// mp3 の前後に入る無音を飛ばして、ループの継ぎ目で途切れないようにする
+function audibleRange(b) {
+  const d = b.getChannelData(0), th = 0.004;
+  let i = 0, j = d.length - 1;
+  while (i < j && Math.abs(d[i]) < th) i++;
+  while (j > i && Math.abs(d[j]) < th) j--;
+  return [i / b.sampleRate, (j + 1) / b.sampleRate];
+}
+const BGM_ENABLED = true;
+const Snd = {
+  ac: null, master: null, seBus: null, bgmBus: null, buf: {}, last: {}, voices: 0, bgmSrc: null, wantBgm: false,
+  // 音楽と効果音は別々にオン/オフ。前の「音：オフ」の人は両方オフで引き継ぐ
+  music: loadJSON('ninjaGate.music', loadJSON('ninjaGate.sound', true)),
+  se: loadJSON('ninjaGate.se', loadJSON('ninjaGate.sound', true)),
+  unlock() {
+    if (this.ac) { if (this.ac.state === 'suspended' && G.state !== 'paused') this.ac.resume(); return; }
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    try { this.ac = new AC(); } catch (e) { return; }
+    this.master = this.ac.createGain();
+    this.master.gain.value = 0.6;                     // 初期音量は控えめ
+    this.master.connect(this.ac.destination);
+    this.seBus = this.ac.createGain(); this.seBus.gain.value = this.se ? 1 : 0; this.seBus.connect(this.master);
+    this.bgmBus = this.ac.createGain(); this.bgmBus.gain.value = this.music ? 1 : 0; this.bgmBus.connect(this.master);
+    this.buf.hit = (() => {
+      const sr = this.ac.sampleRate, n = Math.round(sr * 0.045), b = this.ac.createBuffer(1, n, sr), d = b.getChannelData(0);
+      for (let i = 0; i < n; i++) { const t = i / sr; d[i] = (Math.sin(2 * Math.PI * 900 * t) * 0.6 + (Math.random() * 2 - 1) * 0.4) * Math.exp(-t * 90); }
+      return b;
+    })();
+    for (const k in SOUND_FILES) {
+      const url = SOUND_FILES[k];
+      if (!url) continue;
+      fetch(url).then(r => r.arrayBuffer()).then(d => new Promise((ok, ng) => this.ac.decodeAudioData(d, ok, ng)))
+        .then(b => { this.buf[k] = b; if (k === this.wantBgm) { this.wantBgm = null; this.bgm(k); } }).catch(() => {});
+    }
+  },
+  play(name, o) {
+    o = o || {};
+    const b = this.buf[name];
+    if (!this.ac || !b || !this.se) return;
+    const now = this.ac.currentTime;
+    if (now - (this.last[name] || -1) < (o.minGap == null ? 0.04 : o.minGap)) return;
+    if (this.voices >= (o.soft ? 5 : 8)) return;     // 同時に鳴る数の上限（割れ防止）。当たり音は5つまでで、大事な音の枠を残す
+    this.last[name] = now;
+    const src = this.ac.createBufferSource(), g = this.ac.createGain();
+    src.buffer = b;
+    const p = o.pitch == null ? 0.05 : o.pitch;       // 同じ音の連続は音程を少し揺らす
+    src.playbackRate.value = (o.rate || 1) * (1 + rand(-p, p));
+    g.gain.value = o.vol == null ? 0.7 : o.vol;
+    src.connect(g); g.connect(this.seBus);
+    this.voices++; src.onended = () => { this.voices--; };
+    src.start();
+  },
+  // BGM：'bgm'（ふだん）／'bgmBoss'（大妖怪）／false（止める）
+  bgm(track) {
+    if (track === true) track = 'bgm';
+    if (!BGM_ENABLED) track = false;
+    if (track && track === this.wantBgm && this.bgmSrc) return;   // 同じ曲なら流しっぱなし
+    this.wantBgm = track;
+    if (this.bgmSrc) { try { this.bgmSrc.stop(); } catch (e) {} this.bgmSrc = null; }
+    if (!track || !this.ac || !this.buf[track]) return;
+    const buf = this.buf[track];
+    const src = this.ac.createBufferSource(), g = this.ac.createGain();
+    const [a, z] = audibleRange(buf);
+    src.buffer = buf; src.loop = true; src.loopStart = a; src.loopEnd = z;
+    g.gain.value = 0.35;                              // BGMは効果音より小さく
+    src.connect(g); g.connect(this.bgmBus); src.start(0, a);
+    this.bgmSrc = src;
+  },
+  setMusic(v) { this.music = v; saveJSON('ninjaGate.music', v); if (this.bgmBus) this.bgmBus.gain.value = v ? 1 : 0; },
+  setSe(v) { this.se = v; saveJSON('ninjaGate.se', v); if (this.seBus) this.seBus.gain.value = v ? 1 : 0; },
+  suspend() { if (this.ac && this.ac.state === 'running') this.ac.suspend(); },
+  resume() { if (this.ac && this.ac.state === 'suspended') this.ac.resume(); },
+};
+
+// ===== ループ =====
+let last = performance.now();
+function loop(now) {
+  const dt = Math.min((now - last) / 1000, 1 / 20);
+  last = now;
+  const n = Math.max(1, Math.ceil(dt / (1 / 60)));
+  for (let i = 0; i < n; i++) step(dt / n);
+  render();
+  requestAnimationFrame(loop);
+}
+
+// __DEV_HOOK__（ローカル専用の自動プレイ検証 dev/sim.html が、ここに内部を出す1行を差し込んで使う。本番には何も出さない）
+new ResizeObserver(resize).observe(wrap);
+window.addEventListener('resize', resize);
+window.addEventListener('orientationchange', () => setTimeout(resize, 200));
+resize();
+showOverlay('title');
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
