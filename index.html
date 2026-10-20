@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="msvalidate.01" content="EF6E7C7B123A3218DAE3B152F5B0764D" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#fbeedb">
+<meta name="theme-color" content="#fffdf8">
 <meta name="format-detection" content="telephone=no">
 <title>忍者ゲート突破｜数字ゲートで仲間をふやして全国68国の妖怪を退散させる無料ゲーム</title>
 <meta name="description" content="指で左右に動かすだけの手裏剣シューティング。＋×−÷のゲートで忍者の仲間をふやし、各地の名物が化けた妖怪を「ぽんっ」と退散。壱岐から陸奥まで、昔の国68国のお城を取りもどそう。無料・登録なし。">
@@ -193,6 +193,10 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .route li.done::before{background:var(--k-shu)}
 .route li.now{color:var(--k-sumi)}
 .route li.now::before{background:var(--k-shu);box-shadow:0 0 0 4px rgba(217,67,42,.22)}
+/* ===== 2026-10-20 清潔感（kkp-kit 17eac63 の方針）: ページの地をクリーム全面（#fbeedb）→ 白に近い地に。
+   canvas の絵の色（JS の C）と --font は変えない。お話の断片は左の線＋地 → 罫線1本に。 */
+html,body{background:var(--k-surface)}
+.frag{border-left:0;border-top:1px solid var(--k-line-soft);border-bottom:1px solid var(--k-line-soft);background:none;padding:10px 2px}
 </style>
 </head>
 <body>
