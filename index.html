@@ -197,6 +197,11 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
    canvas の絵の色（JS の C）と --font は変えない。お話の断片は左の線＋地 → 罫線1本に。 */
 html,body{background:var(--k-surface)}
 .frag{border-left:0;border-top:1px solid var(--k-line-soft);border-bottom:1px solid var(--k-line-soft);background:none;padding:10px 2px}
+/* 2026-10-21 見栄え: クリア画面に判（kit の k-stamp「クリア」）。出発前の説明は画面の上に寄せ、上の空きをなくす（下に忍者隊が見える） */
+.clear-stamp{position:absolute;right:16px;top:14px;width:76px;height:76px;font-size:18px;letter-spacing:0;z-index:1;pointer-events:none}
+.sheet-body:has(.clear-stamp) h1{padding-right:76px}
+#ov[data-kind="intro"]{justify-content:flex-start;background:linear-gradient(to top,rgba(255,247,234,0) 0%,rgba(255,247,234,.55) 35%,rgba(255,247,234,.8) 100%)}
+#ov[data-kind="intro"] .sheet{border-top:0;border-bottom:var(--k-bw) solid var(--k-sumi);padding-top:calc(18px + env(safe-area-inset-top))}
 /* 2026-10-21 遊ぶ画面・結果画面の読みやすさ（実際に遊んで測った分） */
 .sheet dd small{font-size:14px}
 </style>
@@ -1559,8 +1564,11 @@ function render() {
     ctx.globalAlpha = 1;
   }
   if (G.state === 'title') {
-    const top = (sheet.getBoundingClientRect().top - wrap.getBoundingClientRect().top) / scale;
-    drawSquad(clamp(top - 62, 100, G.squadY), 10);
+    const sr = sheet.getBoundingClientRect(), wt = wrap.getBoundingClientRect().top;
+    // 出発前の説明は上に寄せている（2026-10-21）。そのときは説明の下に隊を出す
+    const atTop = ov.dataset.kind === 'intro' && !ov.hidden;
+    const top = ((atTop ? sr.bottom : sr.top) - wt) / scale;
+    drawSquad(atTop ? clamp(top + 110, 100, G.squadY) : clamp(top - 62, 100, G.squadY), 10);
   }
   else if (G.N > 0) drawSquad(G.squadY);
   for (const e of G.enemies) if (e.att) drawEnemy(e);   // くっついた妖怪は隊の前に
@@ -1696,7 +1704,8 @@ ${carryLine}
     const nextHint = G.stage < LAST
       ? (k >= CARRY_MAX ? `次の${o.chEnd ? '章' : '面'}は仲間+${CARRY_MAX}人で出発（上限）` : `あと${(k + 1) * CARRY_UNIT - G.N}人で、次の${o.chEnd ? '章' : '面'}に仲間+${k + 1}`) : '';
     const F = FRAGS[CH.n - 1];
-    h = `<p class="kicker">第${CH.n}章　${S.p} / ${CH.len}　クリア</p>
+    h = `<span class="k-stamp k-reveal-stamp clear-stamp" aria-hidden="true">クリア</span>
+<p class="kicker">第${CH.n}章　${S.p} / ${CH.len}　クリア</p>
 <h1>${S.name}のお城を取りもどした！</h1>
 <p class="lead">${S.oyabun ? OYABUN_LINE[S.name] : `名物「${S.mb}」の大妖怪が、ぽんっと退散した。`} 町の人たちが手をふっている。</p>
 ${o.chEnd ? `<div class="frag"><small>第${CH.n}章クリア　${F[0]}${o.newFrag ? '（はじめて手に入れた）' : ''}</small><p>「${F[1]}」</p></div>` : ''}
@@ -1756,7 +1765,9 @@ ${best}
   }
   // ボタンはシートの下に固定し、説明が長くても画面外に出ないようにする
   sheet.innerHTML = `<div class="sheet-body">${h}</div><div class="btns">${btns}</div>${sub ? `<div class="btns sub">${sub}</div>` : ''}${after}`;
+  ov.dataset.kind = kind;
   ov.hidden = false;
+  if (kind === 'clear' && window.KKit) KKit.reveal(sheet.querySelector('.clear-stamp'));
 }
 function toTitle() {
   G.state = 'title'; Snd.bgm(false);
