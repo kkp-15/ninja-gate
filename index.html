@@ -1568,7 +1568,7 @@ function render() {
     // 出発前の説明は上に寄せている（2026-10-21）。そのときは説明の下に隊を出す
     const atTop = ov.dataset.kind === 'intro' && !ov.hidden;
     const top = ((atTop ? sr.bottom : sr.top) - wt) / scale;
-    drawSquad(atTop ? clamp(top + 110, 100, G.squadY) : clamp(top - 62, 100, G.squadY), 10);
+    drawSquad(atTop ? clamp(top + 110, 100, G.squadY) : clamp(top - 62, 100, G.squadY), atTop && G.introN ? G.introN : 10);
   }
   else if (G.N > 0) drawSquad(G.squadY);
   for (const e of G.enemies) if (e.att) drawEnemy(e);   // くっついた妖怪は隊の前に
@@ -1685,6 +1685,7 @@ ${G.best ? best : ''}${SAVE.edoBest ? `<div><dt>陸奥まで</dt><dd><b>${SAVE.e
   } else if (kind === 'intro') {
     const T = stageOf(o.stage), TC = chapterOf(o.stage);
     const lc = G.lastClear, carry = G.carryStage === o.stage ? G.carry : 0;
+    G.introN = startBase(o.stage) + carry;   // 出発前に描く隊の数字も、出発の人数（startStage の G.startN と同じ式）にそろえる
     const carryLine = lc && lc.stage === o.stage - 1
       ? `<p class="lead">${stageOf(lc.stage).name}のお城を ${lc.n}人で取りもどした！${carry ? ` 仲間が${carry}人ふえて出発` : ''}</p>`
       : carry ? `<p class="lead">前の章の活やくで、仲間が${carry}人ふえて出発</p>` : '';
