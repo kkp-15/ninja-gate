@@ -1658,7 +1658,7 @@ ${mapSvg(openCh)}
 <div><dt>ゲート</dt><dd>左右どちらかを通る。<span class="g">青</span>は忍者が増え、<span class="r">赤</span>は減る</dd></div>
 ${G.best ? best : ''}${SAVE.edoBest ? `<div><dt>陸奥まで</dt><dd><b>${SAVE.edoBest}</b>人でたどり着いた</dd></div>` : ''}
 </dl>
-<p class="note pc-only">PCはマウスを動かすか、← → キーでも移動できます。</p>
+<p class="note pc-only">PCはマウスか ← → キーでも動かせます。</p>
 <p class="note">音楽：PeriTune「<a href="https://peritune.com/blog/2020/09/13/ohayashi2/" target="_blank" rel="noopener">Ohayashi2</a>」「<a href="https://peritune.com/blog/2016/04/19/michikusa2/" target="_blank" rel="noopener">Michikusa2</a>」（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>・モノラル化して使用）　効果音：<a href="https://soundeffect-lab.info/" target="_blank" rel="noopener">効果音ラボ</a></p>
 <!-- WEBNINJA_UNIFIED_FOOTER -->
 <footer class="unified-footer">
@@ -1742,7 +1742,7 @@ ${best}
       h += '<p class="note">この章のやり直しの回数を使い切りました。</p>';
     }
   } else if (kind === 'confirm1') {
-    h = `<h1>第${CH.n}章の最初にもどります</h1><p class="lead">よろしいですか？（取りもどした国・巻物・最高記録は消えません）</p>`;
+    h = `<h1>第${CH.n}章の最初にもどります</h1><p class="lead">取りもどした国・巻物・最高記録は消えません。</p>`;
     btns = '<button class="btn primary" data-act="back">いいえ</button>';
     sub = '<button class="btn ghost" data-act="chTop">はい、章の最初から</button>';
   } else if (kind === 'scrolls') {
