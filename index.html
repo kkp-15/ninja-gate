@@ -197,6 +197,8 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
    canvas の絵の色（JS の C）と --font は変えない。お話の断片は左の線＋地 → 罫線1本に。 */
 html,body{background:var(--k-surface)}
 .frag{border-left:0;border-top:1px solid var(--k-line-soft);border-bottom:1px solid var(--k-line-soft);background:none;padding:10px 2px}
+/* 2026-10-21 遊ぶ画面・結果画面の読みやすさ（実際に遊んで測った分） */
+.sheet dd small{font-size:14px}
 </style>
 </head>
 <body>
@@ -1207,6 +1209,8 @@ function roundRect(x, y, w, h, r) {
   ctx.closePath();
 }
 function circle(x, y, r) { ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); }
+// 2026-10-21 読みやすさ: 画面の上で14px未満にならない大きさ（論理座標→実寸は scale 倍）
+function fz(n) { return Math.max(n, 14, 14.2 / scale); }
 function text(s, x, y, size, col, align, weight) {
   ctx.font = `${weight || 800} ${size}px ${FONT}`;
   ctx.textAlign = align || 'left';
@@ -1316,7 +1320,7 @@ function drawBox(b) {
   const r = clamp(b.hp / b.maxHp, 0, 1);
   ctx.fillStyle = 'rgba(74,53,38,.25)'; ctx.fillRect(x, y - 9, b.w, 5);
   ctx.fillStyle = C.orange; ctx.fillRect(x, y - 9, b.w * r, 5);
-  text(`あと${shotsLeft(b)}発`, b.x, y - 14, 12, C.ink, 'center', 800);
+  text(`あと${shotsLeft(b)}発`, b.x, y - 14, fz(12), C.ink, 'center', 800);
 }
 
 function drawEnemy(e) {
@@ -1397,7 +1401,7 @@ function drawBoss(B) {
     ctx.fillStyle = C.bad; roundRect(B.x - bw / 2, by, Math.max(bh, bw * hr), bh, 7.5); ctx.fill();
     const k = B.pop > 0 ? 1 + 0.22 * Math.sin(Math.PI * (1 - B.pop / 0.15)) : 1;
     ctx.save(); ctx.translate(B.x, by + bh / 2 + 4.5 * k); ctx.scale(k, k);
-    ctx.font = `800 12px ${FONT}`; ctx.textAlign = 'center';
+    ctx.font = `800 ${fz(12)}px ${FONT}`; ctx.textAlign = 'center';
     const label = '残り ' + Math.max(1, Math.ceil(B.hp)).toLocaleString('ja-JP');
     ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.strokeStyle = 'rgba(74,53,38,.85)'; ctx.strokeText(label, 0, 0);
     ctx.fillStyle = '#fff'; ctx.fillText(label, 0, 0);
@@ -1494,22 +1498,22 @@ function drawSquad(y0, n) {
 
 function drawHud() {
   ctx.fillStyle = 'rgba(255,247,234,.82)'; ctx.fillRect(0, 0, LW, 68);
-  { const S = stageOf(G.stage); text(`第${S.ch}章 ${S.p}/${S.chLen}　${S.name}`, 12, 22, 12, C.sub, 'left', 700); }
+  { const S = stageOf(G.stage); text(`第${S.ch}章 ${S.p}/${S.chLen}　${S.name}`, 12, 22, fz(12), '#6b5442', 'left', 700); }
   text(G.score.toLocaleString(), 12, 44, 22, C.ink, 'left');
   const bx = 12, bw = LW - 24 - 52, by = 56;
   ctx.fillStyle = C.edge; roundRect(bx, by, bw, 6, 3); ctx.fill();
   if (G.boss) {
     const r = clamp(G.boss.hp / G.boss.maxHp, 0, 1);
     ctx.fillStyle = C.bad; roundRect(bx, by, Math.max(6, bw * r), 6, 3); ctx.fill();
-    text(stageOf(G.stage).mb + 'の大妖怪', bx + bw, by - 6, 11, C.bad, 'right', 700);
+    text(stageOf(G.stage).mb + 'の大妖怪', bx + bw, by - 6, fz(11), C.badD, 'right', 700);
   } else {
     const r = clamp(G.t / G.stageLen, 0, 1);
     ctx.fillStyle = C.orange; roundRect(bx, by, Math.max(6, bw * r), 6, 3); ctx.fill();
-    text('城まで', bx + bw, by - 6, 11, C.sub, 'right', 700);
+    text('城まで', bx + bw, by - 6, fz(11), '#6b5442', 'right', 700);
   }
   const lv = Math.round(Math.log(SHOT_RATE / G.rate) / Math.log(1.25)) + 1;
   const st = `連投 Lv${lv}　横ならび ${G.spread}　貫通 ${G.pierce}　手裏剣 ×${G.dmgMul.toFixed(1)}`;
-  text(st, 14, LH - 14, 11, C.sub, 'left', 700);
+  text(st, 14, LH - 14, fz(11), '#6b5442', 'left', 700);
 }
 
 function drawWarn() {
