@@ -155,6 +155,11 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .unified-footer .uf-name{font-weight:800;color:#87683b;font-size:.875rem}
 .unified-footer a{color:#87683b;text-decoration:none;margin:0 .4rem}
 .unified-footer .uf-copy{color:#7d693c}
+.uf-rel{margin-top:14px;border-top:1px solid var(--line)}
+.uf-rel-h{padding:8px 0 2px;font-size:14px;font-weight:700;color:var(--sub)}
+.uf-rel a{display:block;padding:8px 0;border-bottom:1px solid var(--line);color:#1a6fc4;font-size:15px;line-height:1.5;text-decoration:none}
+.uf-rel a small{display:block;font-size:14px;color:var(--sub)}
+.uf-rel a:last-child{border-bottom:0}
 .jmap svg{display:block;width:100%;max-width:300px;max-height:34vh;margin:0 auto}
 .jmap figcaption{font-size:14px;color:var(--sub);text-align:center}
 .btn.link.sm{font-size:14px;min-height:36px;padding:4px 2px}
@@ -210,7 +215,24 @@ html,body{background:var(--k-surface)}
 <div id="wrap">
   <canvas id="cv"></canvas>
   <button id="pauseBtn" type="button" aria-label="一時停止"><span></span><span></span></button>
-  <div id="ov"><div class="sheet" id="sheet"></div></div>
+  <div id="ov"><div class="sheet" id="sheet"><div class="sheet-body">
+<!-- 関連のゲームと統一フッターは HTML に書いておく（JS が動かなくてもリンクが読める）。タイトル画面を描くとき JS がここから取り出して差し込む -->
+<div id="ufoot">
+<!-- WEBNINJA_RELATED_APPS -->
+<div class="uf-rel">
+  <div class="uf-rel-h">あわせて遊べる</div>
+  <a href="https://soroban.kkpwebninja.com/" target="_blank" rel="noopener">そろばんスパーク<small>珠を動かして計算を練習</small></a>
+  <a href="https://morse.kkpwebninja.com/" target="_blank" rel="noopener">モールス信号の分岐表<small>点と線をたどって文字を覚える</small></a>
+  <a href="https://gesture.kkpwebninja.com/" target="_blank" rel="noopener">ジェスチャーおでこ当て<small>家族や友だちと身振りで当てる</small></a>
+</div>
+<!-- WEBNINJA_UNIFIED_FOOTER -->
+<footer class="unified-footer">
+  <div class="uf-name">web忍者の砦</div>
+  <div><a href="https://kkpwebninja.com/" target="_blank" rel="noopener">本丸トップ</a>·<a href="https://kkpwebninja.com/apps" target="_blank" rel="noopener">全アプリ一覧</a>·<a href="https://privacypolicy.kkpwebninja.com/" target="_blank" rel="noopener">プライバシーポリシー</a>·<a href="https://kkpwebninja.com/otoiawase" target="_blank" rel="noopener">お問い合わせ</a></div>
+  <div class="uf-copy">© 2026 web忍者の砦</div>
+</footer>
+</div>
+</div></div></div>
 </div>
 
 <script>
@@ -225,6 +247,7 @@ const ctx = cv.getContext('2d');
 const ov = document.getElementById('ov');
 const sheet = document.getElementById('sheet');
 const pauseBtn = document.getElementById('pauseBtn');
+const ufoot = document.getElementById('ufoot');   // HTML に書いた関連のゲームと統一フッター（タイトル画面に差し込む）
 const FONT = getComputedStyle(document.documentElement).getPropertyValue('--font').trim() || 'sans-serif';
 
 let LH = 640, scale = 1, dpr = 1;
@@ -1683,12 +1706,7 @@ ${G.best ? best : ''}${SAVE.edoBest ? `<div><dt>陸奥まで</dt><dd><b>${SAVE.e
 </dl>
 <p class="note pc-only">PCはマウスか ← → キーでも動かせます。</p>
 <p class="note">音楽：PeriTune「<a href="https://peritune.com/blog/2020/09/13/ohayashi2/" target="_blank" rel="noopener">Ohayashi2</a>」「<a href="https://peritune.com/blog/2016/04/19/michikusa2/" target="_blank" rel="noopener">Michikusa2</a>」（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>・モノラル化して使用）　効果音：<a href="https://soundeffect-lab.info/" target="_blank" rel="noopener">効果音ラボ</a></p>
-<!-- WEBNINJA_UNIFIED_FOOTER -->
-<footer class="unified-footer">
-  <div class="uf-name">web忍者の砦</div>
-  <div><a href="https://kkpwebninja.com/" target="_blank" rel="noopener">本丸トップ</a>·<a href="https://kkpwebninja.com/apps" target="_blank" rel="noopener">全アプリ一覧</a>·<a href="https://privacypolicy.kkpwebninja.com/" target="_blank" rel="noopener">プライバシーポリシー</a>·<a href="https://kkpwebninja.com/otoiawase" target="_blank" rel="noopener">お問い合わせ</a></div>
-  <div class="uf-copy">© 2026 web忍者の砦</div>
-</footer>`;
+<div id="ufootSlot"></div>`;
     btns = `<button class="btn primary" data-act="start" data-ch="${openCh}">第${openCh}章から</button><button class="btn link" data-act="chapters">章をえらぶ</button><button class="btn link" data-act="scrolls">まきもの（${SAVE.scrolls.length}/${CHAPTERS.length}）</button>${soundBtn()}`;
   } else if (kind === 'chapters') {
     h = `<p class="kicker">遊ぶ章をえらぶ</p><h1>章をえらぶ</h1>${mapSvg(o.hl || openCh)}
@@ -1781,6 +1799,8 @@ ${best}
   }
   // ボタンはシートの下に固定し、説明が長くても画面外に出ないようにする
   sheet.innerHTML = `<div class="sheet-body">${h}</div><div class="btns">${btns}</div>${sub ? `<div class="btns sub">${sub}</div>` : ''}${after}`;
+  const ufootSlot = sheet.querySelector('#ufootSlot');
+  if (ufootSlot && ufoot) ufootSlot.replaceWith(ufoot);
   ov.dataset.kind = kind;
   ov.hidden = false;
   if (kind === 'clear' && window.KKit) KKit.reveal(sheet.querySelector('.clear-stamp'));
